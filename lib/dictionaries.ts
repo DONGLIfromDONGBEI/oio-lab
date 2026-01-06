@@ -20,7 +20,7 @@ export const translations = {
       id: '微信号: Oioedu001',
     },
     footer: {
-      copyright: '© 2026 Back To Life. All rights reserved.',
+      copyright: '© 2026 Oio Lab. All rights reserved.',
     },
   },
   'zh-TW': {
@@ -42,7 +42,7 @@ export const translations = {
       id: '微信號: Oioedu001',
     },
     footer: {
-      copyright: '© 2026 Back To Life. All rights reserved.',
+      copyright: '© 2026 Oio Lab. All rights reserved.',
     },
   },
 };
