@@ -42,22 +42,34 @@ export function BookingTabs() {
     }
   };
 
-  const handleWeChatAction = async () => {
-    // 1. Copy WeChat ID
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering image download if clicking just the copy button
     try {
-      // Use standard Clipboard API
       await navigator.clipboard.writeText("Oioedu001");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      // Fallback for older browsers if needed, but modern Clipboard API is widely supported
       console.error('Failed to copy', err);
     }
+  };
 
-    // 2. Trigger Download (for mobile mainly)
+  const handleImageClick = () => {
+    // 1. Also copy ID for convenience
+    handleCopy({ stopPropagation: () => {} } as React.MouseEvent);
+
+    // 2. Mobile-friendly Image Handling
+    // Instead of forcing a download which might save to Files on iOS,
+    // we can open the image in a new tab/lightbox-like behavior or trust standard long-press behavior.
+    // However, user specifically asked to fix "saving to folder".
+    // On iOS Safari, programmatic 'download' often saves to Files.
+    // The most reliable way for users to save to Photos is long-press.
+    // But to assist, we can try to create a link that forces image content type.
+    
+    // Let's try a direct download link with target _blank as fallback
     const link = document.createElement('a');
     link.href = '/qrcode.jpg';
-    link.download = 'oio-lab-wechat-qr.jpg';
+    link.download = 'OioLab_WeChat_QR.jpg'; // Explicit extension
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -161,8 +173,9 @@ export function BookingTabs() {
             >
               {/* Clickable QR Container */}
               <div 
-                onClick={handleWeChatAction}
+                onClick={handleImageClick}
                 className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden cursor-pointer active:scale-95 transition-transform"
+                title="点击保存图片并复制微信号"
               >
                  <Image 
                    src="/qrcode.jpg" 
@@ -181,26 +194,37 @@ export function BookingTabs() {
                        className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-white"
                      >
                         <Check className="w-8 h-8 mb-2 text-green-400" />
-                        <span className="text-xs font-medium">已复制微信号</span>
+                        <span className="text-xs font-medium">已复制 & 已下载</span>
                      </motion.div>
                    )}
                  </AnimatePresence>
               </div>
 
               <p className="text-[#bbbbbb] font-medium mb-2">{t.wechat.instruction}</p>
-              <p className="text-[#666666] text-sm flex items-center gap-2">
-                {t.wechat.id}
-                <button onClick={handleWeChatAction} className="p-1 hover:text-[#537FE7] transition-colors">
-                  {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+              
+              {/* WeChat ID & Copy Button - Visible on Mobile & PC */}
+              <div className="flex items-center gap-3 bg-[#0b0c0e] px-4 py-2 rounded-lg border border-[#333333]">
+                <span className="text-[#888888] text-sm">微信号:</span>
+                <span className="text-white font-mono text-sm tracking-wide select-all">Oioedu001</span>
+                <div className="w-[1px] h-4 bg-[#333333] mx-1" />
+                <button 
+                  onClick={handleCopy} 
+                  className="group flex items-center gap-1.5 text-[#537FE7] hover:text-white transition-colors text-xs font-medium"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>已复制</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                      <span>复制</span>
+                    </>
+                  )}
                 </button>
-              </p>
-
-              {/* Mobile Only Guide */}
-              <div className="mt-6 md:hidden text-xs text-[#555555] px-4 py-3 bg-[#0b0c0e] rounded-lg border border-[#333333]">
-                <p className="mb-1">📱 手机用户：</p>
-                <p>点击图片保存，打开微信「扫一扫」从相册识别。</p>
-                <p className="mt-1 text-[#537FE7] opacity-80">(已为您自动复制微信号)</p>
               </div>
+
             </motion.div>
           )}
         </AnimatePresence>
