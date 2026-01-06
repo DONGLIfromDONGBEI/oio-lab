@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col overflow-hidden selection:bg-blue-100 selection:text-blue-900">
+    <main className="relative min-h-screen flex flex-col overflow-hidden selection:bg-[#537FE7]/30 selection:text-white">
       <LanguageSwitcher />
       
       {/* Main Content Wrapper */}
@@ -18,7 +18,7 @@ export default function Home() {
           <Hero />
         </div>
 
-        {/* Booking Tabs: CENTERED */}
+        {/* Booking Tabs: Left Aligned, Reduced Top Margin */}
         <div className="w-full flex justify-center mt-2">
            <BookingTabs />
         </div>
@@ -27,9 +27,9 @@ export default function Home() {
       
       <Footer />
       
-      {/* Background Ambient Effects - Subtle Warm/Paper Tone */}
-      <div className="fixed inset-0 -z-20 h-full w-full bg-[#FBFBF9]" />
-      <div className="fixed top-0 left-0 right-0 h-[600px] bg-gradient-to-b from-white to-transparent -z-10 opacity-60" />
+      {/* Background Ambient Effects - Obsidian Dark Mode */}
+      <div className="fixed inset-0 -z-20 h-full w-full bg-[#0b0c0e]" />
+      <div className="fixed top-0 left-0 right-0 h-[600px] bg-gradient-to-b from-[#1c1d21] to-transparent -z-10 opacity-40" />
     </main>
   );
 }

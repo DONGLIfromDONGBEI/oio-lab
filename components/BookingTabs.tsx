@@ -35,14 +35,14 @@ export function BookingTabs() {
   return (
     <div className="w-full max-w-md z-10">
       {/* Tabs */}
-      <div className="flex p-1 mb-6 bg-gray-100 rounded-2xl border border-gray-200 w-full">
+      <div className="flex p-1 mb-6 bg-[#161616] rounded-2xl border border-[#333333] w-full">
         <button
           onClick={() => setActiveTab("email")}
           className={clsx(
             "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
             activeTab === "email"
-              ? "bg-white text-gray-900 shadow-sm border border-gray-200/50"
-              : "text-gray-500 hover:text-gray-900"
+              ? "bg-[#252525] text-white shadow-sm border border-[#444444]"
+              : "text-[#888888] hover:text-white"
           )}
         >
           <Mail className="w-4 h-4" />
@@ -54,7 +54,7 @@ export function BookingTabs() {
             "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
             activeTab === "wechat"
               ? "bg-[#07C160]/10 text-[#07C160] shadow-sm border border-[#07C160]/20"
-              : "text-gray-500 hover:text-gray-900"
+              : "text-[#888888] hover:text-white"
           )}
         >
           <MessageCircle className="w-4 h-4" />
@@ -72,18 +72,18 @@ export function BookingTabs() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.3 }}
-              className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm"
+              className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm"
             >
               {status === "success" ? (
                 <div className="flex flex-col items-center justify-center py-8 text-center">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4 text-green-600"
+                    className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4 text-green-500"
                   >
                     <CheckCircle2 className="w-8 h-8" />
                   </motion.div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.emailForm.success}</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">{t.emailForm.success}</h3>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -94,13 +94,13 @@ export function BookingTabs() {
                       placeholder={t.emailForm.placeholder}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all"
+                      className="w-full px-4 py-4 bg-[#0b0c0e] border border-[#333333] rounded-xl text-white placeholder:text-[#555555] focus:outline-none focus:border-[#537FE7] focus:ring-1 focus:ring-[#537FE7] transition-all"
                     />
                   </div>
                   <button
                     disabled={status === "loading"}
                     type="submit"
-                    className="group relative flex items-center justify-center gap-2 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-md shadow-orange-500/20"
+                    className="group relative flex items-center justify-center gap-2 w-full py-4 bg-[#537FE7] text-white rounded-xl font-bold hover:bg-[#426ad1] transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-md shadow-[#537FE7]/20"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       {status === "loading" ? (
@@ -114,7 +114,7 @@ export function BookingTabs() {
                     </span>
                   </button>
                   {status === "error" && (
-                    <p className="text-red-500 text-sm text-center">{t.emailForm.error}</p>
+                    <p className="text-red-400 text-sm text-center">{t.emailForm.error}</p>
                   )}
                 </form>
               )}
@@ -126,16 +126,16 @@ export function BookingTabs() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
+              className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
             >
-              <div className="w-48 h-48 bg-gray-50 rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center">
+              <div className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center text-black">
                  {/* Placeholder for QR Code */}
-                 <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 text-xs">
+                 <div className="w-full h-full bg-neutral-200 rounded-lg flex items-center justify-center text-neutral-400 text-xs">
                     QR Code Here
                  </div>
               </div>
-              <p className="text-gray-700 font-medium mb-2">{t.wechat.instruction}</p>
-              <p className="text-gray-500 text-sm">{t.wechat.id}</p>
+              <p className="text-[#bbbbbb] font-medium mb-2">{t.wechat.instruction}</p>
+              <p className="text-[#666666] text-sm">{t.wechat.id}</p>
             </motion.div>
           )}
         </AnimatePresence>

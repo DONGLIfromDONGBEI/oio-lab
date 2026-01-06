@@ -6,14 +6,15 @@
 }
 
 :root {
-  --background: #FBFBF9; /* Warm Gray / Paper-like */
-  --foreground: #1E1E20; /* Deep Charcoal */
+  --background: #0b0c0e; /* Obsidian-like Deep Dark */
+  --foreground: #dcddde; /* Off-white text */
+  --accent-blue: #537FE7; /* Obsidian Purple replaced with Blue */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #FBFBF9;
-    --foreground: #1E1E20;
+    --background: #0b0c0e;
+    --foreground: #dcddde;
   }
 }
 
