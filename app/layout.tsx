@@ -4,8 +4,8 @@ import { Providers } from "@/components/Providers";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "Back To Life | AI Upgrade",
-  description: "用 AI 升级你的思维、语言与行动",
+  title: "Oio Lab",
+  description: "自信表达，从容生活",
 };
 
 export default function RootLayout({
