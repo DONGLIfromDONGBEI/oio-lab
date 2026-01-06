@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MessageCircle, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { Mail, MessageCircle, ArrowRight, CheckCircle2, Loader2, Download, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import clsx from "clsx";
 
@@ -12,6 +12,7 @@ export function BookingTabs() {
   const [activeTab, setActiveTab] = useState<"email" | "wechat">("email");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (locale === "zh-CN") {
@@ -39,6 +40,27 @@ export function BookingTabs() {
       console.error(error);
       setStatus("error");
     }
+  };
+
+  const handleWeChatAction = async () => {
+    // 1. Copy WeChat ID
+    try {
+      // Use standard Clipboard API
+      await navigator.clipboard.writeText("Oioedu001");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers if needed, but modern Clipboard API is widely supported
+      console.error('Failed to copy', err);
+    }
+
+    // 2. Trigger Download (for mobile mainly)
+    const link = document.createElement('a');
+    link.href = '/qrcode.jpg';
+    link.download = 'oio-lab-wechat-qr.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -137,16 +159,48 @@ export function BookingTabs() {
               transition={{ duration: 0.3 }}
               className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
             >
-              <div className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden">
+              {/* Clickable QR Container */}
+              <div 
+                onClick={handleWeChatAction}
+                className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden cursor-pointer active:scale-95 transition-transform"
+              >
                  <Image 
                    src="/qrcode.jpg" 
                    alt="WeChat QR Code" 
                    fill
                    className="object-cover"
                  />
+                 
+                 {/* Overlay for "Copied" feedback */}
+                 <AnimatePresence>
+                   {copied && (
+                     <motion.div 
+                       initial={{ opacity: 0 }}
+                       animate={{ opacity: 1 }}
+                       exit={{ opacity: 0 }}
+                       className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-white"
+                     >
+                        <Check className="w-8 h-8 mb-2 text-green-400" />
+                        <span className="text-xs font-medium">已复制微信号</span>
+                     </motion.div>
+                   )}
+                 </AnimatePresence>
               </div>
+
               <p className="text-[#bbbbbb] font-medium mb-2">{t.wechat.instruction}</p>
-              <p className="text-[#666666] text-sm">{t.wechat.id}</p>
+              <p className="text-[#666666] text-sm flex items-center gap-2">
+                {t.wechat.id}
+                <button onClick={handleWeChatAction} className="p-1 hover:text-[#537FE7] transition-colors">
+                  {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                </button>
+              </p>
+
+              {/* Mobile Only Guide */}
+              <div className="mt-6 md:hidden text-xs text-[#555555] px-4 py-3 bg-[#0b0c0e] rounded-lg border border-[#333333]">
+                <p className="mb-1">📱 手机用户：</p>
+                <p>点击图片保存，打开微信「扫一扫」从相册识别。</p>
+                <p className="mt-1 text-[#537FE7] opacity-80">(已为您自动复制微信号)</p>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
