@@ -100,7 +100,8 @@ export function BookingTabs() {
                   <button
                     disabled={status === "loading"}
                     type="submit"
-                    className="group relative flex items-center justify-center gap-2 w-full py-4 bg-[#537FE7] text-white rounded-xl font-bold hover:bg-[#426ad1] transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-md shadow-[#537FE7]/20"
+                    // Added subtle glow: shadow-[0_0_20px_rgba(249,115,22,0.15)]
+                    className="group relative flex items-center justify-center gap-2 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:shadow-[0_0_25px_rgba(249,115,22,0.25)]"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       {status === "loading" ? (

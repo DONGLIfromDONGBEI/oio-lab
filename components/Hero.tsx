@@ -68,15 +68,13 @@ export function Hero() {
     <section className="relative flex flex-col items-start justify-start w-full mb-10">
       {/* Header Group */}
       <div className="flex flex-col items-start w-full mb-10 pl-1">
-        {/* Eyebrow: Blue Accent, No Box/Bg to match Obsidian's clean headers usually, but user asked to keep layout. 
-           Previous layout had badge. I will keep badge but darken it.
-        */}
+        {/* Eyebrow: Blue Accent, Text-Only (No Box), Left Aligned */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          // Obsidian Dark Mode: Translucent dark badge with accent text
-          className="inline-block text-[#537FE7] text-3xl font-semibold tracking-[0.1em] mb-3 -ml-6"
+          // Removed border, bg, rounded, padding, and negative margin
+          className="text-[#537FE7] text-3xl font-semibold tracking-[0.1em] mb-3"
         >
           {t.eyebrow}
         </motion.div>
