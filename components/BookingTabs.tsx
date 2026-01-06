@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MessageCircle, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import Image from "next/image";
 import clsx from "clsx";
 
 export function BookingTabs() {
@@ -11,6 +12,14 @@ export function BookingTabs() {
   const [activeTab, setActiveTab] = useState<"email" | "wechat">("email");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useEffect(() => {
+    if (locale === "zh-CN") {
+      setActiveTab("wechat");
+    } else {
+      setActiveTab("email");
+    }
+  }, [locale]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,7 +109,6 @@ export function BookingTabs() {
                   <button
                     disabled={status === "loading"}
                     type="submit"
-                    // Added subtle glow: shadow-[0_0_20px_rgba(249,115,22,0.15)]
                     className="group relative flex items-center justify-center gap-2 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:shadow-[0_0_25px_rgba(249,115,22,0.25)]"
                   >
                     <span className="relative z-10 flex items-center gap-2">
@@ -129,11 +137,13 @@ export function BookingTabs() {
               transition={{ duration: 0.3 }}
               className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
             >
-              <div className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center text-black">
-                 {/* Placeholder for QR Code */}
-                 <div className="w-full h-full bg-neutral-200 rounded-lg flex items-center justify-center text-neutral-400 text-xs">
-                    QR Code Here
-                 </div>
+              <div className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden">
+                 <Image 
+                   src="/qrcode.jpg" 
+                   alt="WeChat QR Code" 
+                   fill
+                   className="object-cover"
+                 />
               </div>
               <p className="text-[#bbbbbb] font-medium mb-2">{t.wechat.instruction}</p>
               <p className="text-[#666666] text-sm">{t.wechat.id}</p>
