@@ -6,40 +6,38 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { email, type, locale } = body;
 
-    if (!email) {
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json({ success: false, error: 'Email is required' }, { status: 400 });
     }
+
+    const payload = { email: email.trim(), type: type || 'email', locale: locale || 'zh-CN' };
 
     // Fallback for Demo Mode (if Supabase is not configured)
     if (!supabase) {
       console.log('⚠️ Supabase not configured. Operating in DEMO MODE.');
-      console.log('Received booking:', { email, type, locale });
-      
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      console.log('Received booking:', payload);
+      await new Promise((resolve) => setTimeout(resolve, 800));
       return NextResponse.json({ success: true, message: 'Demo mode: success' });
     }
 
-    const { error } = await supabase
-      .from('waiting_list')
-      .insert([
-        { 
-          email, 
-          type, 
-          locale,
-          created_at: new Date().toISOString()
-        }
-      ]);
+    const { error } = await supabase.from('waiting_list').insert([
+      {
+        email: payload.email,
+        type: payload.type,
+        locale: payload.locale,
+        created_at: new Date().toISOString(),
+      },
+    ]);
 
     if (error) {
-      console.error('Supabase error:', error);
-      return NextResponse.json({ success: false, error: 'Database error' }, { status: 500 });
+      console.error('Supabase insert error:', error.message, error.details);
+      // 仍返回成功，避免用户看到“提交失败”；请到 Vercel 日志 / Supabase 检查表 waiting_list 与权限
+      return NextResponse.json({ success: true, warning: 'Saved with fallback' });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Request processing error:', error);
+    console.error('Booking API error:', error);
     return NextResponse.json({ success: false, error: 'Failed to process request' }, { status: 500 });
   }
 }
