@@ -15,11 +15,7 @@ export function BookingTabs() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (locale === "zh-CN") {
-      setActiveTab("wechat");
-    } else {
-      setActiveTab("email");
-    }
+    setActiveTab("wechat");
   }, [locale]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -80,18 +76,6 @@ export function BookingTabs() {
       {/* Tabs */}
       <div className="flex p-1 mb-6 bg-[#161616] rounded-2xl border border-[#333333] w-full">
         <button
-          onClick={() => setActiveTab("email")}
-          className={clsx(
-            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
-            activeTab === "email"
-              ? "bg-[#252525] text-white shadow-sm border border-[#444444]"
-              : "text-[#888888] hover:text-white"
-          )}
-        >
-          <Mail className="w-4 h-4" />
-          {t.tabs.email}
-        </button>
-        <button
           onClick={() => setActiveTab("wechat")}
           className={clsx(
             "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
@@ -102,6 +86,18 @@ export function BookingTabs() {
         >
           <MessageCircle className="w-4 h-4" />
           {t.tabs.wechat}
+        </button>
+        <button
+          onClick={() => setActiveTab("email")}
+          className={clsx(
+            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
+            activeTab === "email"
+              ? "bg-[#252525] text-white shadow-sm border border-[#444444]"
+              : "text-[#888888] hover:text-white"
+          )}
+        >
+          <Mail className="w-4 h-4" />
+          {t.tabs.email}
         </button>
       </div>
 
