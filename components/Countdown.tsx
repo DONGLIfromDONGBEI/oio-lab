@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
-/** Beijing time 2026-02-27 23:59:59 */
-const DEADLINE_MS = new Date("2026-02-27T23:59:59+08:00").getTime();
+/** 首批招募已结束，始终显示「已截止」文案 */
+const DEADLINE_MS = new Date("2026-02-20T23:59:59+08:00").getTime();
 
 function getRemaining(now: number) {
   const d = Math.max(0, DEADLINE_MS - now);
@@ -41,43 +41,54 @@ export function Countdown() {
       className="w-full flex flex-col items-center gap-4 mt-10 text-center"
     >
       <div className="w-full max-w-md mx-auto bg-[#161616] border border-[#333333] rounded-2xl px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-        <p className="text-[#bbbbbb] text-sm mb-4">{t.countdown.deadlineNote}</p>
         {remaining.expired ? (
-          <p className="text-[#537FE7] font-semibold">{t.countdown.expired}</p>
+          <>
+            <p className="text-[#bbbbbb] text-sm mb-3">
+              {t.countdown.closedLine1}
+            </p>
+            <p className="text-[#537FE7] font-medium">
+              {t.countdown.closedLine2}
+            </p>
+          </>
         ) : (
-          <div className="flex items-baseline gap-2 flex-wrap justify-center">
-            <span className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-white tabular-nums">
-                {remaining.days}
+          <>
+            <p className="text-[#bbbbbb] text-sm mb-4">
+              {t.countdown.deadlineNote}
+            </p>
+            <div className="flex items-baseline gap-2 flex-wrap justify-center">
+              <span className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-white tabular-nums">
+                  {remaining.days}
+                </span>
+                <span className="text-[#888888] text-sm">{t.countdown.days}</span>
               </span>
-              <span className="text-[#888888] text-sm">{t.countdown.days}</span>
-            </span>
-            <span className="text-white/50">:</span>
-            <span className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-white tabular-nums">
-                {pad(remaining.hours)}
+              <span className="text-white/50">:</span>
+              <span className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-white tabular-nums">
+                  {pad(remaining.hours)}
+                </span>
+                <span className="text-[#888888] text-sm">{t.countdown.hours}</span>
               </span>
-              <span className="text-[#888888] text-sm">{t.countdown.hours}</span>
-            </span>
-            <span className="text-white/50">:</span>
-            <span className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-white tabular-nums">
-                {pad(remaining.minutes)}
+              <span className="text-white/50">:</span>
+              <span className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-white tabular-nums">
+                  {pad(remaining.minutes)}
+                </span>
+                <span className="text-[#888888] text-sm">{t.countdown.minutes}</span>
               </span>
-              <span className="text-[#888888] text-sm">{t.countdown.minutes}</span>
-            </span>
-            <span className="text-white/50">:</span>
-            <span className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-white tabular-nums">
-                {pad(remaining.seconds)}
+              <span className="text-white/50">:</span>
+              <span className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-white tabular-nums">
+                  {pad(remaining.seconds)}
+                </span>
+                <span className="text-[#888888] text-sm">{t.countdown.seconds}</span>
               </span>
-              <span className="text-[#888888] text-sm">{t.countdown.seconds}</span>
-            </span>
-          </div>
+            </div>
+            <p className="text-[#537FE7] text-sm font-medium mt-4">
+              {t.countdown.notice}
+            </p>
+          </>
         )}
-        <p className="text-[#537FE7] text-sm font-medium mt-4">
-          {t.countdown.notice}
-        </p>
       </div>
     </motion.section>
   );

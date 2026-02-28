@@ -25,6 +25,8 @@ export const translations = {
     countdown: {
       deadlineNote: '截止日期：2026年2月27日 (UTC+8)',
       notice: '首批创始名额限8位，共创期特权仅限本批次',
+      closedLine1: '首批创始名额已满，招募已截止。',
+      closedLine2: '预约下一批，第一时间获取开放通知。',
       days: '天',
       hours: '时',
       minutes: '分',
@@ -99,6 +101,8 @@ export const translations = {
     countdown: {
       deadlineNote: '截止日期：2026年2月27日 (UTC+8)',
       notice: '首批創始名額限8位，共創期特權僅限本批次',
+      closedLine1: '首批創始名額已滿，招募已截止。',
+      closedLine2: '預約下一批，第一時間獲取開放通知。',
       days: '天',
       hours: '時',
       minutes: '分',
