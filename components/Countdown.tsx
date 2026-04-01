@@ -43,7 +43,7 @@ export function Countdown() {
       <div className="w-full max-w-md mx-auto bg-[#161616] border border-[#333333] rounded-2xl px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         {remaining.expired ? (
           <>
-            <p className="text-[#bbbbbb] text-sm mb-3">
+            <p className="text-[#e0e0e0] text-sm mb-3">
               {t.countdown.closedLine1}
             </p>
             <p className="text-[#537FE7] font-medium">
@@ -52,7 +52,7 @@ export function Countdown() {
           </>
         ) : (
           <>
-            <p className="text-[#bbbbbb] text-sm mb-4">
+            <p className="text-[#e0e0e0] text-sm mb-4">
               {t.countdown.deadlineNote}
             </p>
             <div className="flex items-baseline gap-2 flex-wrap justify-center">
@@ -60,28 +60,28 @@ export function Countdown() {
                 <span className="text-2xl font-bold text-white tabular-nums">
                   {remaining.days}
                 </span>
-                <span className="text-[#888888] text-sm">{t.countdown.days}</span>
+                <span className="text-[#e0e0e0] text-sm">{t.countdown.days}</span>
               </span>
               <span className="text-white/50">:</span>
               <span className="flex items-baseline gap-1">
                 <span className="text-2xl font-bold text-white tabular-nums">
                   {pad(remaining.hours)}
                 </span>
-                <span className="text-[#888888] text-sm">{t.countdown.hours}</span>
+                <span className="text-[#e0e0e0] text-sm">{t.countdown.hours}</span>
               </span>
               <span className="text-white/50">:</span>
               <span className="flex items-baseline gap-1">
                 <span className="text-2xl font-bold text-white tabular-nums">
                   {pad(remaining.minutes)}
                 </span>
-                <span className="text-[#888888] text-sm">{t.countdown.minutes}</span>
+                <span className="text-[#e0e0e0] text-sm">{t.countdown.minutes}</span>
               </span>
               <span className="text-white/50">:</span>
               <span className="flex items-baseline gap-1">
                 <span className="text-2xl font-bold text-white tabular-nums">
                   {pad(remaining.seconds)}
                 </span>
-                <span className="text-[#888888] text-sm">{t.countdown.seconds}</span>
+                <span className="text-[#e0e0e0] text-sm">{t.countdown.seconds}</span>
               </span>
             </div>
             <p className="text-[#537FE7] text-sm font-medium mt-4">

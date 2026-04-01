@@ -4,8 +4,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Hero } from "@/components/Hero";
 import { VideoSection } from "@/components/VideoSection";
 import { CourseIntro } from "@/components/CourseIntro";
+import { WhoItsFor } from "@/components/WhoItsFor";
+import { SixWeekEvolution } from "@/components/SixWeekEvolution";
 import { Countdown } from "@/components/Countdown";
 import { BookingTabs } from "@/components/BookingTabs";
+import { CourseInfoCard } from "@/components/CourseInfoCard";
+import { EnrollmentCta } from "@/components/EnrollmentCta";
+import { SHOW_COUNTDOWN_SECTION, SHOW_COURSE_INFO_CARD } from "@/lib/page-sections";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Footer } from "@/components/Footer";
 
@@ -26,7 +31,7 @@ export default function Home() {
   const { t } = useLanguage();
 
   return (
-    <main className="relative min-h-screen flex flex-col overflow-hidden selection:bg-[#537FE7]/30 selection:text-white">
+    <main className="relative flex min-h-screen flex-col overflow-x-clip selection:bg-[#537FE7]/30 selection:text-white">
       <LanguageSwitcher />
       
       {/* Main Content Wrapper */}
@@ -37,15 +42,26 @@ export default function Home() {
           <Hero />
         </div>
 
+        <EnrollmentCta className="mt-4 mb-10 md:mt-5 md:mb-12" />
+
         {/* Video: OIO 2分钟介绍 */}
         <VideoSection
           title={t.videos.introTitle}
           src={VIDEO_OIO_INTRO}
           poster={POSTER_OIO_INTRO}
+          sectionClassName="mt-0"
         />
 
         {/* Course Intro: OIO系统拆解 */}
         <CourseIntro />
+
+        {/* 不适合谁 · 适合谁（先排除再对号入座） */}
+        <WhoItsFor />
+
+        {/* 你的OIO六周进化：纵向时间线 */}
+        <SixWeekEvolution />
+
+        <EnrollmentCta className="my-8 md:my-10" />
 
         {/* Video: OIO的十年故事 */}
         <VideoSection
@@ -53,6 +69,7 @@ export default function Home() {
           subtitle={t.videos.decadeSubtitle}
           src={VIDEO_OIO_LAUNCH}
           poster={POSTER_OIO_LAUNCH}
+          sectionClassName="mt-0"
         />
 
         {/* Video: Hailey的OIO深度使用评测 */}
@@ -62,14 +79,22 @@ export default function Home() {
           poster={POSTER_REVIEW}
         />
 
-        {/* Booking Tabs: Email & WeChat */}
-        <div className="w-full flex justify-center mt-2">
+        {/* 课程信息卡：见 lib/page-sections.ts + docs/COURSE_INFO_AND_COUNTDOWN.md */}
+        {SHOW_COURSE_INFO_CARD ? <CourseInfoCard /> : null}
+
+        {/* 报名按钮：紧挨预约入口，读完规则后的转化点（不放页尾） */}
+        <EnrollmentCta className="mt-8 md:mt-10" />
+
+        {/* Booking Tabs: Email & WeChat（EnrollmentCta 会滚动到此并切到微信） */}
+        <div
+          id="oio-booking"
+          className="mt-6 flex w-full scroll-mt-28 justify-center md:mt-6 md:scroll-mt-32"
+        >
           <BookingTabs />
         </div>
 
-        {/* Countdown + Notice (below booking) */}
-        <Countdown />
-
+        {/* 倒计时 / 截止通知：见 lib/page-sections.ts + docs/COURSE_INFO_AND_COUNTDOWN.md */}
+        {SHOW_COUNTDOWN_SECTION ? <Countdown /> : null}
       </div>
       
       <Footer />

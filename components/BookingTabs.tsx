@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MessageCircle, ArrowRight, CheckCircle2, Loader2, Download, Copy, Check } from "lucide-react";
+import { Mail, MessageCircle, MousePointerClick, CheckCircle2, Loader2, Download, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import clsx from "clsx";
 
@@ -17,6 +17,12 @@ export function BookingTabs() {
   useEffect(() => {
     setActiveTab("wechat");
   }, [locale]);
+
+  useEffect(() => {
+    const focusWechat = () => setActiveTab("wechat");
+    window.addEventListener("oio-booking-focus-wechat", focusWechat);
+    return () => window.removeEventListener("oio-booking-focus-wechat", focusWechat);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +87,7 @@ export function BookingTabs() {
             "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
             activeTab === "wechat"
               ? "bg-[#07C160]/10 text-[#07C160] shadow-sm border border-[#07C160]/20"
-              : "text-[#888888] hover:text-white"
+              : "text-[#e0e0e0] hover:text-white"
           )}
         >
           <MessageCircle className="w-4 h-4" />
@@ -93,7 +99,7 @@ export function BookingTabs() {
             "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
             activeTab === "email"
               ? "bg-[#252525] text-white shadow-sm border border-[#444444]"
-              : "text-[#888888] hover:text-white"
+              : "text-[#e0e0e0] hover:text-white"
           )}
         >
           <Mail className="w-4 h-4" />
@@ -139,7 +145,7 @@ export function BookingTabs() {
                   <button
                     disabled={status === "loading"}
                     type="submit"
-                    className="group relative flex items-center justify-center gap-2 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:shadow-[0_0_25px_rgba(249,115,22,0.25)]"
+                    className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 py-3.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all hover:bg-orange-600 hover:shadow-[0_0_25px_rgba(249,115,22,0.25)] disabled:cursor-not-allowed disabled:opacity-50 md:py-4 md:text-base"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       {status === "loading" ? (
@@ -147,7 +153,10 @@ export function BookingTabs() {
                       ) : (
                         <>
                           {t.emailForm.submit}
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <MousePointerClick
+                            className="h-4 w-4 shrink-0 opacity-95 transition-transform group-hover:scale-110"
+                            aria-hidden
+                          />
                         </>
                       )}
                     </span>
@@ -196,11 +205,11 @@ export function BookingTabs() {
                  </AnimatePresence>
               </div>
 
-              <p className="text-[#bbbbbb] font-medium mb-2">{t.wechat.instruction}</p>
+              <p className="text-[#e0e0e0] font-medium mb-2">{t.wechat.instruction}</p>
               
               {/* WeChat ID & Copy Button - Visible on Mobile & PC */}
               <div className="flex items-center gap-3 bg-[#0b0c0e] px-4 py-2 rounded-lg border border-[#333333]">
-                <span className="text-[#888888] text-sm">微信号:</span>
+                <span className="text-[#e0e0e0] text-sm">微信号:</span>
                 <span className="text-white font-mono text-sm tracking-wide select-all">Oioedu001</span>
                 <div className="w-[1px] h-4 bg-[#333333] mx-1" />
                 <button 

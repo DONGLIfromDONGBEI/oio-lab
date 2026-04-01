@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 
 /** Renders text with "OIO" in accent blue */
 function OIOBlue({ text }: { text: string }) {
@@ -29,16 +30,27 @@ interface VideoSectionProps {
   src: string;
   /** Optional poster/thumbnail URL when first frame cannot be used */
   poster?: string;
+  /** 覆盖区块顶部间距（默认 mt-10），用于与上下模块对称留白 */
+  sectionClassName?: string;
 }
 
-export function VideoSection({ title, subtitle, src, poster }: VideoSectionProps) {
+export function VideoSection({
+  title,
+  subtitle,
+  src,
+  poster,
+  sectionClassName,
+}: VideoSectionProps) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="w-full flex flex-col items-center gap-4 mt-10 text-center"
+      className={clsx(
+        "flex w-full flex-col items-center gap-4 text-center",
+        sectionClassName ?? "mt-10"
+      )}
     >
       {title && (
         <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
@@ -46,7 +58,7 @@ export function VideoSection({ title, subtitle, src, poster }: VideoSectionProps
         </h2>
       )}
       {subtitle && (
-        <p className="text-[#bbbbbb] text-base md:text-lg max-w-xl">
+        <p className="text-[#e0e0e0] text-base md:text-lg max-w-xl">
           {subtitle}
         </p>
       )}

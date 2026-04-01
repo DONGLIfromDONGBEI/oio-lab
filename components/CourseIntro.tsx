@@ -31,7 +31,7 @@ function SectionHeading({ heading }: { heading: string }) {
       </h3>
     );
   }
-  if (heading.startsWith("Imprint：")) {
+  if (heading.startsWith("Imprint：") || heading.startsWith("Input：") || heading.startsWith("imprint：")) {
     return (
       <h3 className="text-[#ffffff] font-semibold text-lg">
         <span className="text-[#537FE7]">I</span>
@@ -60,25 +60,27 @@ export function CourseIntro() {
         <OIOBlue text={sectionTitle} />
       </h2>
       <div className="w-full max-w-[38rem] mx-auto bg-[#161616] border border-[#333333] rounded-2xl px-8 py-6 md:pl-10 md:pr-6 md:py-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-        <div className="flex flex-col gap-8 text-base md:text-lg text-[#bbbbbb] text-left">
+        <div className="flex flex-col gap-8 text-base md:text-lg text-[#e0e0e0] text-left">
           {sections.map((sec, i) => (
             <div key={i} className="flex flex-col gap-3">
               <SectionHeading heading={sec.heading} />
               {sec.body && (
-                <p className="leading-[1.7] text-[#bbbbbb]">{sec.body}</p>
+                <p className="whitespace-pre-line leading-[1.7] text-[#e0e0e0]">{sec.body}</p>
               )}
-              <ul className="list-disc list-outside space-y-2 pl-6">
-                {sec.bullets.map((b, j) => (
-                  <li key={j} className="flex flex-col gap-0.5">
-                    <span className="font-semibold text-[#e0e0e0] not-italic">
-                      {b.title}：
-                    </span>
-                    <span className="leading-[1.7] italic text-[#bbbbbb]">
-                      {b.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {(sec.bullets as Array<{ title: string; text: string }>).length > 0 && (
+                <ul className="list-disc list-outside space-y-2 pl-6">
+                  {(sec.bullets as Array<{ title: string; text: string }>).map((b, j) => (
+                    <li key={j} className="flex flex-col gap-0.5">
+                      <span className="font-semibold text-[#e0e0e0] not-italic">
+                        {b.title}：
+                      </span>
+                      <span className="leading-[1.7] italic text-[#e0e0e0]">
+                        {b.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>

@@ -65,7 +65,7 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative flex flex-col items-start justify-start w-full mb-10">
+    <section className="relative mb-4 flex w-full flex-col items-start justify-start md:mb-5">
       {/* Header Group */}
       <div className="flex flex-col items-start w-full mb-10 pl-1">
         {/* Eyebrow: Blue Accent, Text-Only (No Box), Left Aligned */}
@@ -74,7 +74,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           // Removed border, bg, rounded, padding, and negative margin
-          className="text-[#537FE7] text-3xl font-semibold tracking-[0.1em] mb-3"
+          className="text-white text-3xl font-semibold tracking-[0.04em] mb-3"
         >
           {t.eyebrow}
         </motion.div>
@@ -84,7 +84,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffffff] leading-[1.1]"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#537FE7] leading-[1.1]"
         >
           {t.title}
         </motion.h1>
@@ -98,7 +98,7 @@ export function Hero() {
         // Dark card bg (#161616 or similar), subtle border (#333), dark shadow
         className="w-full max-w-[38rem] bg-[#161616] border border-[#333333] rounded-2xl px-8 py-6 md:pl-10 md:pr-6 md:py-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] self-center"
       >
-        <div className="text-base md:text-lg text-[#bbbbbb] text-left">
+        <div className="text-left text-base text-white md:text-lg">
           <RichTextRenderer text={t.subtitle} />
         </div>
       </motion.div>

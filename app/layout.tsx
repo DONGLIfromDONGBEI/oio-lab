@@ -4,7 +4,7 @@ import { Providers } from "@/components/Providers";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "Oio Lab",
+  title: "OIO Sync",
   description: "自信表达，从容生活",
 };
 
