@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MessageCircle, MousePointerClick, CheckCircle2, Loader2, Download, Copy, Check } from "lucide-react";
+import { Mail, MessageCircle, MousePointerClick, CheckCircle2, Loader2, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import clsx from "clsx";
 
 export function BookingTabs() {
   const { t, locale } = useLanguage();
-  const [activeTab, setActiveTab] = useState<"email" | "wechat">("email");
+  const [activeTab, setActiveTab] = useState<"email" | "wechat" | "line">("email");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [copied, setCopied] = useState(false);
@@ -79,30 +79,51 @@ export function BookingTabs() {
 
   return (
     <div className="w-full max-w-md z-10">
-      {/* Tabs */}
+      <h2 className="mb-4 text-center text-lg font-semibold leading-snug text-white md:text-xl">
+        {t.booking.sectionTitle}
+      </h2>
       <div className="flex p-1 mb-6 bg-[#161616] rounded-2xl border border-[#333333] w-full">
         <button
           onClick={() => setActiveTab("wechat")}
           className={clsx(
-            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
+            "flex-1 flex items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300",
             activeTab === "wechat"
               ? "bg-[#07C160]/10 text-[#07C160] shadow-sm border border-[#07C160]/20"
               : "text-[#e0e0e0] hover:text-white"
           )}
         >
-          <MessageCircle className="w-4 h-4" />
+          <MessageCircle className="w-4 h-4 shrink-0" />
           {t.tabs.wechat}
+        </button>
+        <button
+          onClick={() => setActiveTab("line")}
+          className={clsx(
+            "flex-1 flex items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300",
+            activeTab === "line"
+              ? "bg-[#06C755]/10 text-[#06C755] shadow-sm border border-[#06C755]/20"
+              : "text-[#e0e0e0] hover:text-white"
+          )}
+        >
+          <span
+            className={clsx(
+              "flex h-4 w-4 shrink-0 items-center justify-center rounded-[5px] text-[8px] font-bold leading-none",
+              activeTab === "line" ? "bg-[#06C755] text-white" : "bg-[#3a3a3a] text-[#e0e0e0]"
+            )}
+          >
+            L
+          </span>
+          {t.tabs.line}
         </button>
         <button
           onClick={() => setActiveTab("email")}
           className={clsx(
-            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300",
+            "flex-1 flex items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300",
             activeTab === "email"
               ? "bg-[#252525] text-white shadow-sm border border-[#444444]"
               : "text-[#e0e0e0] hover:text-white"
           )}
         >
-          <Mail className="w-4 h-4" />
+          <Mail className="w-4 h-4 shrink-0" />
           {t.tabs.email}
         </button>
       </div>
@@ -110,7 +131,7 @@ export function BookingTabs() {
       {/* Content */}
       <div className="min-h-[300px]">
         <AnimatePresence mode="wait">
-          {activeTab === "email" ? (
+          {activeTab === "email" && (
             <motion.div
               key="email"
               initial={{ opacity: 0, x: -20 }}
@@ -167,7 +188,8 @@ export function BookingTabs() {
                 </form>
               )}
             </motion.div>
-          ) : (
+          )}
+          {activeTab === "wechat" && (
             <motion.div
               key="wechat"
               initial={{ opacity: 0, x: 20 }}
@@ -176,44 +198,36 @@ export function BookingTabs() {
               transition={{ duration: 0.3 }}
               className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
             >
-              {/* Clickable QR Container */}
-              <div 
+              <div
                 onClick={handleImageClick}
                 className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden cursor-pointer active:scale-95 transition-transform"
                 title="点击保存图片并复制微信号"
               >
-                 <Image 
-                   src="/qrcode.jpg" 
-                   alt="WeChat QR Code" 
-                   fill
-                   className="object-cover"
-                 />
-                 
-                 {/* Overlay for "Copied" feedback */}
-                 <AnimatePresence>
-                   {copied && (
-                     <motion.div 
-                       initial={{ opacity: 0 }}
-                       animate={{ opacity: 1 }}
-                       exit={{ opacity: 0 }}
-                       className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-white"
-                     >
-                        <Check className="w-8 h-8 mb-2 text-green-400" />
-                        <span className="text-xs font-medium">已复制 & 已下载</span>
-                     </motion.div>
-                   )}
-                 </AnimatePresence>
+                <Image src="/qrcode.jpg" alt="WeChat QR Code" fill className="object-cover" />
+
+                <AnimatePresence>
+                  {copied && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-white"
+                    >
+                      <Check className="w-8 h-8 mb-2 text-green-400" />
+                      <span className="text-xs font-medium">已复制 & 已下载</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <p className="text-[#e0e0e0] font-medium mb-2">{t.wechat.instruction}</p>
-              
-              {/* WeChat ID & Copy Button - Visible on Mobile & PC */}
+
               <div className="flex items-center gap-3 bg-[#0b0c0e] px-4 py-2 rounded-lg border border-[#333333]">
                 <span className="text-[#e0e0e0] text-sm">微信号:</span>
                 <span className="text-white font-mono text-sm tracking-wide select-all">Oioedu001</span>
                 <div className="w-[1px] h-4 bg-[#333333] mx-1" />
-                <button 
-                  onClick={handleCopy} 
+                <button
+                  onClick={handleCopy}
                   className="group flex items-center gap-1.5 text-[#537FE7] hover:text-white transition-colors text-xs font-medium"
                 >
                   {copied ? (
@@ -229,7 +243,26 @@ export function BookingTabs() {
                   )}
                 </button>
               </div>
-
+            </motion.div>
+          )}
+          {activeTab === "line" && (
+            <motion.div
+              key="line"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
+            >
+              <div className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden">
+                <Image
+                  src="/line-qrcode.png"
+                  alt={t.line.instruction}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-[#e0e0e0] font-medium">{t.line.instruction}</p>
             </motion.div>
           )}
         </AnimatePresence>

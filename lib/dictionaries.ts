@@ -6,8 +6,9 @@ export const translations = {
     title: '开始自信用英文',
     subtitle: '消除“中文大杀四方，英文瞬间降智”的身份断层。\n找回属于你的自信，让英文真正为你所用。',
     tabs: {
-      email: 'Email 预约',
-      wechat: '微信预约',
+      email: 'Email',
+      wechat: '微信',
+      line: 'Line',
     },
     emailForm: {
       placeholder: '请输入您的邮箱地址',
@@ -19,12 +20,18 @@ export const translations = {
       instruction: '请扫描二维码添加微信',
       id: '微信号: Oioedu001',
     },
+    line: {
+      instruction: '请扫描二维码添加 Line',
+    },
+    booking: {
+      sectionTitle: '预约咨询',
+    },
     footer: {
       copyright: '© 2026 OIO Sync. All rights reserved.',
     },
     countdown: {
-      deadlineNote: '截止日期：2026年2月27日 (UTC+8)',
-      notice: '首批创始名额限8位，共创期特权仅限本批次',
+      sectionTitle: '距本批招募截止',
+      notice: '本期限额约 60 人，招满即止',
       closedLine1: '首批创始名额已满，招募已截止。',
       closedLine2: '预约下一批，第一时间获取开放通知。',
       days: '天',
@@ -35,12 +42,18 @@ export const translations = {
     },
     courseInfo: {
       title: '本期课程信息',
-      timezoneNote: '注意：以下时间均为北京时间，海外同学请换算好时差，以免造成不便。',
-      scheduleLine: '直播课安排：固定每周六主课，每周三答疑练习课；共6周。',
-      firstWeekLine: '开课第一周日期：4月11日（周六）；4月15日（周三）',
-      replayLine: '回看说明：每节课回看将在24小时内上传（相关福利内容同步开放，如有）',
+      timezoneNote:
+        '以下时间均为北京时间（UTC+8，东八区）；海外学员请务必换算时差。',
+      scheduleLine:
+        '直播课表：每周六主课、每周三答疑练习，固定 19:00 开始，约 1–2 小时；共 6 周，12 场直播。',
+      firstWeekLine:
+        '首周上课时间：4 月 11 日（周六）主课、4 月 15 日（周三）答疑练习；之后连续五周同一时间。',
+      replayLine:
+        '回看政策：每节课都有回看录像。每节课结束后 24 小时内上传（如有配套福利，同步开放）。',
       refundLine:
-        '退款政策：14天无理由退款（自第一堂课4月11日开始计算，截止4月24日。微信申请即可，过期不退）。',
+        '退款政策：自首节直播课（4 月 11 日）起 14 天内可申请退款，截止 4 月 24 日（北京时间）。请于微信申请，逾期不退。',
+      alternatePaymentNote:
+        '付款问题：当前以微信支付为主。若你无法使用微信支付，请添加课程微信或通过 Line 联系我们，协商其他付款方式。',
     },
     sixWeek: {
       title: '你的6周OIO进化地图',
@@ -142,7 +155,7 @@ export const translations = {
     enrollment: {
       joinNow: '立即加入',
       reserveNow: '即将发布 · 预约优先名额',
-      reserveAriaLabel: '即将发布 · 预约优先名额，前往微信预约',
+      reserveAriaLabel: '即将发布 · 预约优先名额，前往微信',
     },
   },
   'zh-TW': {
@@ -150,8 +163,9 @@ export const translations = {
     title: '開始自信用英文',
     subtitle: '消除「中文大殺四方，英文瞬間降智」的身份斷層。\n找回屬於你的自信，讓英文真正為你所用。',
     tabs: {
-      email: 'Email 預約',
-      wechat: '微信預約',
+      email: 'Email',
+      wechat: '微信',
+      line: 'Line',
     },
     emailForm: {
       placeholder: '請輸入您的電子郵箱',
@@ -163,12 +177,18 @@ export const translations = {
       instruction: '請掃描二維碼添加微信',
       id: '微信號: Oioedu001',
     },
+    line: {
+      instruction: '請掃描二維碼加入 Line',
+    },
+    booking: {
+      sectionTitle: '預約諮詢',
+    },
     footer: {
       copyright: '© 2026 OIO Sync. All rights reserved.',
     },
     countdown: {
-      deadlineNote: '截止日期：2026年2月27日 (UTC+8)',
-      notice: '首批創始名額限8位，共創期特權僅限本批次',
+      sectionTitle: '距本批招募截止',
+      notice: '本期限額約 60 人，招滿即止',
       closedLine1: '首批創始名額已滿，招募已截止。',
       closedLine2: '預約下一批，第一時間獲取開放通知。',
       days: '天',
@@ -179,12 +199,18 @@ export const translations = {
     },
     courseInfo: {
       title: '本期課程資訊',
-      timezoneNote: '注意：以下時間均為北京時間，海外同學請換算好時差，以免造成不便。',
-      scheduleLine: '直播課安排：固定每週六主課，每週三答疑練習課；共6週。',
-      firstWeekLine: '開課第一週日期：4月11日（週六）；4月15日（週三）',
-      replayLine: '回看說明：每節課回看將在24小時內上傳（相關福利內容同步開放，如有）',
+      timezoneNote:
+        '以下時間均為北京時間（UTC+8，東八區）；海外同學請務必換算時差。',
+      scheduleLine:
+        '直播課表：每週六主課、每週三答疑／練習課，固定 19:00 開始，約 1–2 小時；共 6 週，12 場直播。',
+      firstWeekLine:
+        '首週上課時間：4 月 11 日（週六）主課、4 月 15 日（週三）答疑練習；之後連續五週同一時間。',
+      replayLine:
+        '回看政策：每節課都有回看錄影。每節課結束後 24 小時內上傳（如有配套福利，同步開放）。',
       refundLine:
-        '退款政策：14天無理由退款（自第一堂課4月11日開始計算，截止4月24日。微信申請即可，過期不退）。',
+        '退款政策：自首節直播課（4 月 11 日）起 14 天內可申請退款，截止 4 月 24 日（北京時間）。請於微信申請，逾期不退。',
+      alternatePaymentNote:
+        '付款問題：目前以微信支付為主。若你無法使用微信支付，請新增課程微信或透過 Line 聯絡我們，另洽付款方式。',
     },
     sixWeek: {
       title: '你的6週OIO進化地圖',
@@ -286,7 +312,7 @@ export const translations = {
     enrollment: {
       joinNow: '立即加入',
       reserveNow: '即將發布 · 預約優先名額',
-      reserveAriaLabel: '即將發布 · 預約優先名額，前往微信預約',
+      reserveAriaLabel: '即將發布 · 預約優先名額，前往微信',
     },
   },
 };

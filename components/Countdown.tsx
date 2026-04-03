@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
-/** 首批招募已结束，始终显示「已截止」文案 */
-const DEADLINE_MS = new Date("2026-02-20T23:59:59+08:00").getTime();
+/** 固定截止时刻（ISO 含 +08:00）；全球用户看到的剩余时间一致，晚于此刻显示「已截止」 */
+const DEADLINE_MS = new Date("2026-04-11T12:00:00+08:00").getTime();
 
 function getRemaining(now: number) {
   const d = Math.max(0, DEADLINE_MS - now);
@@ -38,9 +38,12 @@ export function Countdown() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="w-full flex flex-col items-center gap-4 mt-10 text-center"
+      className="mt-8 flex w-full flex-col items-center gap-4 text-center md:mt-10"
     >
-      <div className="w-full max-w-md mx-auto bg-[#161616] border border-[#333333] rounded-2xl px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <h2 className="text-xl font-bold tracking-tight text-white md:text-2xl">
+        {t.countdown.sectionTitle}
+      </h2>
+      <div className="mx-auto w-full max-w-md rounded-2xl border border-[#333333] bg-[#161616] px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         {remaining.expired ? (
           <>
             <p className="text-[#e0e0e0] text-sm mb-3">
@@ -52,9 +55,6 @@ export function Countdown() {
           </>
         ) : (
           <>
-            <p className="text-[#e0e0e0] text-sm mb-4">
-              {t.countdown.deadlineNote}
-            </p>
             <div className="flex items-baseline gap-2 flex-wrap justify-center">
               <span className="flex items-baseline gap-1">
                 <span className="text-2xl font-bold text-white tabular-nums">
@@ -84,7 +84,7 @@ export function Countdown() {
                 <span className="text-[#e0e0e0] text-sm">{t.countdown.seconds}</span>
               </span>
             </div>
-            <p className="text-[#537FE7] text-sm font-medium mt-4">
+            <p className="mt-5 max-w-xl text-center text-sm font-medium leading-snug text-[#537FE7] md:text-base">
               {t.countdown.notice}
             </p>
           </>

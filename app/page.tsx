@@ -10,7 +10,7 @@ import { Countdown } from "@/components/Countdown";
 import { BookingTabs } from "@/components/BookingTabs";
 import { CourseInfoCard } from "@/components/CourseInfoCard";
 import { EnrollmentCta } from "@/components/EnrollmentCta";
-import { SHOW_COUNTDOWN_SECTION, SHOW_COURSE_INFO_CARD } from "@/lib/page-sections";
+import { SHOW_COURSE_INFO_CARD, SHOW_COUNTDOWN_SECTION } from "@/lib/page-sections";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Footer } from "@/components/Footer";
 
@@ -61,6 +61,12 @@ export default function Home() {
         {/* 你的OIO六周进化：纵向时间线 */}
         <SixWeekEvolution />
 
+        {/* 本期课程信息：六周地图后；显示开关见 lib/page-sections.ts */}
+        {SHOW_COURSE_INFO_CARD ? <CourseInfoCard /> : null}
+
+        {/* 招募截止倒计时：紧接课程信息，再引导中部 CTA；开关见 lib/page-sections.ts */}
+        {SHOW_COUNTDOWN_SECTION ? <Countdown /> : null}
+
         <EnrollmentCta className="my-8 md:my-10" />
 
         {/* Video: OIO的十年故事 */}
@@ -79,22 +85,16 @@ export default function Home() {
           poster={POSTER_REVIEW}
         />
 
-        {/* 课程信息卡：见 lib/page-sections.ts + docs/COURSE_INFO_AND_COUNTDOWN.md */}
-        {SHOW_COURSE_INFO_CARD ? <CourseInfoCard /> : null}
-
         {/* 报名按钮：紧挨预约入口，读完规则后的转化点（不放页尾） */}
         <EnrollmentCta className="mt-8 md:mt-10" />
 
-        {/* Booking Tabs: Email & WeChat（EnrollmentCta 会滚动到此并切到微信） */}
+        {/* 预约咨询：与上方按钮相对视频的留白一致（mt-8 / md:mt-10） */}
         <div
           id="oio-booking"
-          className="mt-6 flex w-full scroll-mt-28 justify-center md:mt-6 md:scroll-mt-32"
+          className="mt-8 flex w-full scroll-mt-28 justify-center md:mt-10 md:scroll-mt-32"
         >
           <BookingTabs />
         </div>
-
-        {/* 倒计时 / 截止通知：见 lib/page-sections.ts + docs/COURSE_INFO_AND_COUNTDOWN.md */}
-        {SHOW_COUNTDOWN_SECTION ? <Countdown /> : null}
       </div>
       
       <Footer />
