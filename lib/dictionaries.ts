@@ -31,7 +31,7 @@ export const translations = {
     },
     countdown: {
       sectionTitle: '距本批招募截止',
-      notice: '本期限额约 60 人，招满即止',
+      notice: '本期限额约 50 人，招满即止',
       closedLine1: '首批创始名额已满，招募已截止。',
       closedLine2: '预约下一批，第一时间获取开放通知。',
       days: '天',
@@ -188,7 +188,7 @@ export const translations = {
     },
     countdown: {
       sectionTitle: '距本批招募截止',
-      notice: '本期限額約 60 人，招滿即止',
+      notice: '本期限額約 50 人，招滿即止',
       closedLine1: '首批創始名額已滿，招募已截止。',
       closedLine2: '預約下一批，第一時間獲取開放通知。',
       days: '天',
