@@ -69,8 +69,8 @@ export function BookingTabs() {
     
     // Let's try a direct download link with target _blank as fallback
     const link = document.createElement('a');
-    link.href = '/qrcode.jpg';
-    link.download = 'OioLab_WeChat_QR.jpg'; // Explicit extension
+    link.href = '/wechat-qrcode.png';
+    link.download = 'OioLab_WeChat_QR.png';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
@@ -203,7 +203,7 @@ export function BookingTabs() {
                 className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden cursor-pointer active:scale-95 transition-transform"
                 title="点击保存图片并复制微信号"
               >
-                <Image src="/qrcode.jpg" alt="WeChat QR Code" fill className="object-cover" />
+                <Image src="/wechat-qrcode.png" alt="WeChat QR Code" fill className="object-contain" />
 
                 <AnimatePresence>
                   {copied && (
