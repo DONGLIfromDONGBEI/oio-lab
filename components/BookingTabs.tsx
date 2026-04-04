@@ -7,12 +7,15 @@ import { Mail, MessageCircle, MousePointerClick, CheckCircle2, Loader2, Copy, Ch
 import Image from "next/image";
 import clsx from "clsx";
 
+const WECHAT_ID = "Oioedu001";
+
 export function BookingTabs() {
   const { t, locale } = useLanguage();
-  const [activeTab, setActiveTab] = useState<"email" | "wechat" | "line">("email");
+  const [activeTab, setActiveTab] = useState<"email" | "wechat">("email");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [copied, setCopied] = useState(false);
+  const [copiedWechat, setCopiedWechat] = useState(false);
+  const [copiedSupportEmail, setCopiedSupportEmail] = useState(false);
 
   useEffect(() => {
     setActiveTab("wechat");
@@ -36,7 +39,7 @@ export function BookingTabs() {
       });
 
       if (!response.ok) throw new Error("Failed");
-      
+
       setStatus("success");
     } catch (error) {
       console.error(error);
@@ -44,38 +47,66 @@ export function BookingTabs() {
     }
   };
 
-  const handleCopy = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent triggering image download if clicking just the copy button
+  const handleCopyWechatId = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     try {
-      await navigator.clipboard.writeText("Oioedu001");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await navigator.clipboard.writeText(WECHAT_ID);
+      setCopiedWechat(true);
+      setTimeout(() => setCopiedWechat(false), 2000);
     } catch (err) {
-      console.error('Failed to copy', err);
+      console.error("Failed to copy", err);
+    }
+  };
+
+  const handleCopySupportEmail = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(t.booking.supportEmail);
+      setCopiedSupportEmail(true);
+      setTimeout(() => setCopiedSupportEmail(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy", err);
     }
   };
 
   const handleImageClick = () => {
-    // 1. Also copy ID for convenience
-    handleCopy({ stopPropagation: () => {} } as React.MouseEvent);
+    handleCopyWechatId({ stopPropagation: () => {} } as React.MouseEvent);
 
-    // 2. Mobile-friendly Image Handling
-    // Instead of forcing a download which might save to Files on iOS,
-    // we can open the image in a new tab/lightbox-like behavior or trust standard long-press behavior.
-    // However, user specifically asked to fix "saving to folder".
-    // On iOS Safari, programmatic 'download' often saves to Files.
-    // The most reliable way for users to save to Photos is long-press.
-    // But to assist, we can try to create a link that forces image content type.
-    
-    // Let's try a direct download link with target _blank as fallback
-    const link = document.createElement('a');
-    link.href = '/wechat-qrcode.png';
-    link.download = 'OioLab_WeChat_QR.png';
-    link.target = '_blank';
+    const link = document.createElement("a");
+    link.href = "/wechat-qrcode.png";
+    link.download = "OioLab_WeChat_QR.png";
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+
+  const emailContactRow = (
+    <div className="mt-4 flex w-full min-w-0 flex-nowrap items-center justify-center gap-1.5 overflow-x-auto bg-[#0b0c0e] px-3 py-2 rounded-lg border border-[#333333] sm:gap-2">
+      <span className="shrink-0 text-xs text-[#e0e0e0]">{t.booking.contactEmailLabel}</span>
+      <span className="shrink-0 whitespace-nowrap font-mono text-[11px] tracking-tight text-white select-all sm:text-xs">
+        {t.booking.supportEmail}
+      </span>
+      <div className="mx-0.5 h-3 w-px shrink-0 self-center bg-[#333333]" />
+      <button
+        type="button"
+        onClick={handleCopySupportEmail}
+        className="group flex shrink-0 items-center gap-1 text-[11px] font-medium text-[#537FE7] transition-colors hover:text-white sm:text-xs"
+      >
+        {copiedSupportEmail ? (
+          <>
+            <Check className="h-3.5 w-3.5" />
+            <span>{t.booking.copied}</span>
+          </>
+        ) : (
+          <>
+            <Copy className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
+            <span>{t.booking.copy}</span>
+          </>
+        )}
+      </button>
+    </div>
+  );
 
   return (
     <div className="w-full max-w-md z-10">
@@ -84,6 +115,7 @@ export function BookingTabs() {
       </h2>
       <div className="flex p-1 mb-6 bg-[#161616] rounded-2xl border border-[#333333] w-full">
         <button
+          type="button"
           onClick={() => setActiveTab("wechat")}
           className={clsx(
             "flex-1 flex items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300",
@@ -96,25 +128,7 @@ export function BookingTabs() {
           {t.tabs.wechat}
         </button>
         <button
-          onClick={() => setActiveTab("line")}
-          className={clsx(
-            "flex-1 flex items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300",
-            activeTab === "line"
-              ? "bg-[#06C755]/10 text-[#06C755] shadow-sm border border-[#06C755]/20"
-              : "text-[#e0e0e0] hover:text-white"
-          )}
-        >
-          <span
-            className={clsx(
-              "flex h-4 w-4 shrink-0 items-center justify-center rounded-[5px] text-[8px] font-bold leading-none",
-              activeTab === "line" ? "bg-[#06C755] text-white" : "bg-[#3a3a3a] text-[#e0e0e0]"
-            )}
-          >
-            L
-          </span>
-          {t.tabs.line}
-        </button>
-        <button
+          type="button"
           onClick={() => setActiveTab("email")}
           className={clsx(
             "flex-1 flex items-center justify-center gap-2 py-3 px-2 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300",
@@ -128,7 +142,6 @@ export function BookingTabs() {
         </button>
       </div>
 
-      {/* Content */}
       <div className="min-h-[300px]">
         <AnimatePresence mode="wait">
           {activeTab === "email" && (
@@ -138,54 +151,60 @@ export function BookingTabs() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.3 }}
-              className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm"
+              className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-stretch"
             >
               {status === "success" ? (
-                <div className="flex flex-col items-center justify-center py-8 text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4 text-green-500"
-                  >
-                    <CheckCircle2 className="w-8 h-8" />
-                  </motion.div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{t.emailForm.success}</h3>
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex flex-col items-center justify-center py-8 text-center">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4 text-green-500"
+                    >
+                      <CheckCircle2 className="w-8 h-8" />
+                    </motion.div>
+                    <h3 className="text-xl font-semibold text-white mb-2">{t.emailForm.success}</h3>
+                  </div>
+                  {emailContactRow}
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                  <div className="space-y-2">
-                    <input
-                      type="email"
-                      required
-                      placeholder={t.emailForm.placeholder}
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-4 bg-[#0b0c0e] border border-[#333333] rounded-xl text-white placeholder:text-[#555555] focus:outline-none focus:border-[#537FE7] focus:ring-1 focus:ring-[#537FE7] transition-all"
-                    />
-                  </div>
-                  <button
-                    disabled={status === "loading"}
-                    type="submit"
-                    className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 py-3.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all hover:bg-orange-600 hover:shadow-[0_0_25px_rgba(249,115,22,0.25)] disabled:cursor-not-allowed disabled:opacity-50 md:py-4 md:text-base"
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      {status === "loading" ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <>
-                          {t.emailForm.submit}
-                          <MousePointerClick
-                            className="h-4 w-4 shrink-0 opacity-95 transition-transform group-hover:scale-110"
-                            aria-hidden
-                          />
-                        </>
-                      )}
-                    </span>
-                  </button>
-                  {status === "error" && (
-                    <p className="text-red-400 text-sm text-center">{t.emailForm.error}</p>
-                  )}
-                </form>
+                <>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <div className="space-y-2">
+                      <input
+                        type="email"
+                        required
+                        placeholder={t.emailForm.placeholder}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-4 py-4 bg-[#0b0c0e] border border-[#333333] rounded-xl text-white placeholder:text-[#555555] focus:outline-none focus:border-[#537FE7] focus:ring-1 focus:ring-[#537FE7] transition-all"
+                      />
+                    </div>
+                    <button
+                      disabled={status === "loading"}
+                      type="submit"
+                      className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 py-3.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all hover:bg-orange-600 hover:shadow-[0_0_25px_rgba(249,115,22,0.25)] disabled:cursor-not-allowed disabled:opacity-50 md:py-4 md:text-base"
+                    >
+                      <span className="relative z-10 flex items-center gap-2">
+                        {status === "loading" ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <>
+                            {t.emailForm.submit}
+                            <MousePointerClick
+                              className="h-4 w-4 shrink-0 opacity-95 transition-transform group-hover:scale-110"
+                              aria-hidden
+                            />
+                          </>
+                        )}
+                      </span>
+                    </button>
+                    {status === "error" && (
+                      <p className="text-red-400 text-sm text-center">{t.emailForm.error}</p>
+                    )}
+                  </form>
+                  {emailContactRow}
+                </>
               )}
             </motion.div>
           )}
@@ -206,7 +225,7 @@ export function BookingTabs() {
                 <Image src="/wechat-qrcode.png" alt="WeChat QR Code" fill className="object-contain" />
 
                 <AnimatePresence>
-                  {copied && (
+                  {copiedWechat && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -224,45 +243,26 @@ export function BookingTabs() {
 
               <div className="flex items-center gap-3 bg-[#0b0c0e] px-4 py-2 rounded-lg border border-[#333333]">
                 <span className="text-[#e0e0e0] text-sm">微信号:</span>
-                <span className="text-white font-mono text-sm tracking-wide select-all">Oioedu001</span>
+                <span className="text-white font-mono text-sm tracking-wide select-all">{WECHAT_ID}</span>
                 <div className="w-[1px] h-4 bg-[#333333] mx-1" />
                 <button
-                  onClick={handleCopy}
+                  type="button"
+                  onClick={handleCopyWechatId}
                   className="group flex items-center gap-1.5 text-[#537FE7] hover:text-white transition-colors text-xs font-medium"
                 >
-                  {copied ? (
+                  {copiedWechat ? (
                     <>
                       <Check className="w-3.5 h-3.5" />
-                      <span>已复制</span>
+                      <span>{t.booking.copied}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-                      <span>复制</span>
+                      <span>{t.booking.copy}</span>
                     </>
                   )}
                 </button>
               </div>
-            </motion.div>
-          )}
-          {activeTab === "line" && (
-            <motion.div
-              key="line"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-[#161616] border border-[#333333] rounded-3xl p-8 shadow-sm flex flex-col items-center text-center"
-            >
-              <div className="w-48 h-48 bg-white rounded-xl mb-6 p-2 shadow-inner border border-gray-100 flex items-center justify-center relative overflow-hidden">
-                <Image
-                  src="/line-qrcode.png"
-                  alt={t.line.instruction}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <p className="text-[#e0e0e0] font-medium">{t.line.instruction}</p>
             </motion.div>
           )}
         </AnimatePresence>

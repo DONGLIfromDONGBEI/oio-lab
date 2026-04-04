@@ -89,7 +89,7 @@ export default function Home() {
         {/* 报名按钮：紧挨预约入口，读完规则后的转化点（不放页尾） */}
         <EnrollmentCta className="mt-8 md:mt-10" />
 
-        {/* 预约咨询：与上方按钮相对视频的留白一致（mt-8 / md:mt-10） */}
+        {/* 预约咨询（微信 / Email）：与上方按钮相对视频的留白一致（mt-8 / md:mt-10） */}
         <div
           id="oio-booking"
           className="mt-8 flex w-full scroll-mt-28 justify-center md:mt-10 md:scroll-mt-32"

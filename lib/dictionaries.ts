@@ -8,7 +8,6 @@ export const translations = {
     tabs: {
       email: 'Email',
       wechat: '微信',
-      line: 'Line',
     },
     emailForm: {
       placeholder: '请输入您的邮箱地址',
@@ -20,11 +19,12 @@ export const translations = {
       instruction: '请扫描二维码添加微信',
       id: '微信号: Oioedu001',
     },
-    line: {
-      instruction: '请扫描二维码添加 Line',
-    },
     booking: {
       sectionTitle: '预约咨询',
+      contactEmailLabel: '联系我们：',
+      supportEmail: 'ziyoumaoxianying@gmail.com',
+      copy: '复制',
+      copied: '已复制',
     },
     footer: {
       copyright: '© 2026 OIO Sync. All rights reserved.',
@@ -53,7 +53,7 @@ export const translations = {
       refundLine:
         '退款政策：自首节直播课（4 月 11 日）起 14 天内可申请退款，截止 4 月 24 日（北京时间）。请于微信申请，逾期不退。',
       alternatePaymentNote:
-        '付款问题：当前以微信支付为主。若你无法使用微信支付，请添加课程微信或通过 Line 联系我们，协商其他付款方式。',
+        '付款问题：当前以微信支付为主。若你无法使用微信支付，请添加课程微信或通过 Email 联系我们，协商其他付款方式。',
     },
     sixWeek: {
       title: '你的6周OIO进化地图',
@@ -192,7 +192,7 @@ export const translations = {
         {
           q: '付款方式只有微信吗？',
           a:
-            '当前以微信支付为主。若你无法使用微信支付，请添加课程微信联系我们，协商其他付款方式。',
+            '当前以微信支付为主。若你无法使用微信支付，请添加课程微信或通过 Email 联系我们，协商其他付款方式。',
         },
       ],
     },
@@ -204,7 +204,6 @@ export const translations = {
     tabs: {
       email: 'Email',
       wechat: '微信',
-      line: 'Line',
     },
     emailForm: {
       placeholder: '請輸入您的電子郵箱',
@@ -216,11 +215,12 @@ export const translations = {
       instruction: '請掃描二維碼添加微信',
       id: '微信號: Oioedu001',
     },
-    line: {
-      instruction: '請掃描二維碼加入 Line',
-    },
     booking: {
       sectionTitle: '預約諮詢',
+      contactEmailLabel: '聯絡我們：',
+      supportEmail: 'ziyoumaoxianying@gmail.com',
+      copy: '複製',
+      copied: '已複製',
     },
     footer: {
       copyright: '© 2026 OIO Sync. All rights reserved.',
@@ -249,7 +249,7 @@ export const translations = {
       refundLine:
         '退款政策：自首節直播課（4 月 11 日）起 14 天內可申請退款，截止 4 月 24 日（北京時間）。請於微信申請，逾期不退。',
       alternatePaymentNote:
-        '付款問題：目前以微信支付為主。若你無法使用微信支付，請新增課程微信或透過 Line 聯絡我們，另洽付款方式。',
+        '付款問題：目前以微信支付為主。若你無法使用微信支付，請新增課程微信或透過 Email 聯絡我們，另洽付款方式。',
     },
     sixWeek: {
       title: '你的6週OIO進化地圖',
@@ -388,7 +388,7 @@ export const translations = {
         {
           q: '付款方式只有微信嗎？',
           a:
-            '目前以微信支付為主。若你無法使用微信支付，請新增課程微信聯絡我們，另洽其他付款方式。',
+            '目前以微信支付為主。若你無法使用微信支付，請新增課程微信或透過 Email 聯絡我們，另洽其他付款方式。',
         },
       ],
     },
