@@ -13,6 +13,7 @@ import { EnrollmentCta } from "@/components/EnrollmentCta";
 import { SHOW_COURSE_INFO_CARD, SHOW_COUNTDOWN_SECTION } from "@/lib/page-sections";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Footer } from "@/components/Footer";
+import { FaqSection } from "@/components/FaqSection";
 
 const VIDEO_OIO_INTRO =
   "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/OIO%E7%90%86%E5%BF%B5%E4%BB%8B%E7%BB%8D.mp4";
@@ -95,8 +96,10 @@ export default function Home() {
         >
           <BookingTabs />
         </div>
+
+        <FaqSection />
       </div>
-      
+
       <Footer />
       
       {/* Background Ambient Effects - Obsidian Dark Mode */}
