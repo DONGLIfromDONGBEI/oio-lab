@@ -7,10 +7,23 @@
 export const ENROLLMENT_CTA_PLACEHOLDER_URL =
   "https://apprunwspi61682.h5.xet.citv.cn/p/course/ecourse/course_3Bnimq606nz7K7mYKDyBpi7ayR1";
 
+/**
+ * 本期招生结束后 `true`：橙色按钮不跳外链，统一滚至 `#oio-booking`（与 env 关闭时行为一致）。
+ * 下期恢复外链报名时设回 `false`，并配置 `NEXT_PUBLIC_ENROLLMENT_OPEN` 与 `NEXT_PUBLIC_ENROLLMENT_CHECKOUT_URL`。
+ */
+export const ENROLLMENT_APPOINTMENT_ONLY = true;
+
 export function getEnrollmentConfig(): {
   open: boolean;
   ctaUrl: string;
 } {
+  if (ENROLLMENT_APPOINTMENT_ONLY) {
+    return {
+      open: false,
+      ctaUrl: ENROLLMENT_CTA_PLACEHOLDER_URL,
+    };
+  }
+
   const flag = (process.env.NEXT_PUBLIC_ENROLLMENT_OPEN || "").toLowerCase().trim();
   const closedExplicitly =
     flag === "false" || flag === "0" || flag === "no";

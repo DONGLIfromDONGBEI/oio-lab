@@ -43,14 +43,11 @@ export default function Home() {
           <Hero />
         </div>
 
-        <EnrollmentCta className="mt-4 mb-10 md:mt-5 md:mb-12" />
-
         {/* Video: OIO 2分钟介绍 */}
         <VideoSection
           title={t.videos.introTitle}
           src={VIDEO_OIO_INTRO}
           poster={POSTER_OIO_INTRO}
-          sectionClassName="mt-0"
         />
 
         {/* Course Intro: OIO系统拆解 */}
@@ -76,7 +73,6 @@ export default function Home() {
           subtitle={t.videos.decadeSubtitle}
           src={VIDEO_OIO_LAUNCH}
           poster={POSTER_OIO_LAUNCH}
-          sectionClassName="mt-0"
         />
 
         {/* Video: Hailey的OIO深度使用评测 */}
@@ -85,9 +81,6 @@ export default function Home() {
           src={VIDEO_REVIEW}
           poster={POSTER_REVIEW}
         />
-
-        {/* 报名按钮：紧挨预约入口，读完规则后的转化点（不放页尾） */}
-        <EnrollmentCta className="mt-8 md:mt-10" />
 
         {/* 预约咨询（微信 / Email）：与上方按钮相对视频的留白一致（mt-8 / md:mt-10） */}
         <div

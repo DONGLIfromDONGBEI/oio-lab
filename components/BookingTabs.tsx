@@ -110,9 +110,12 @@ export function BookingTabs() {
 
   return (
     <div className="w-full max-w-md z-10">
-      <h2 className="mb-4 text-center text-lg font-semibold leading-snug text-white md:text-xl">
+      <h2 className="mb-2 text-center text-lg font-semibold leading-snug text-white md:text-xl">
         {t.booking.sectionTitle}
       </h2>
+      <p className="mb-5 text-center text-sm leading-relaxed text-[#bbbbbb] md:mb-6 md:text-base">
+        {t.booking.sectionSubtitle}
+      </p>
       <div className="flex p-1 mb-6 bg-[#161616] rounded-2xl border border-[#333333] w-full">
         <button
           type="button"

@@ -48,21 +48,25 @@ export function VideoSection({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={clsx(
-        "flex w-full flex-col items-center gap-4 text-center",
+        "flex w-full flex-col items-center text-center",
         sectionClassName ?? "mt-10"
       )}
     >
-      {title && (
-        <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-          <OIOBlue text={title} />
-        </h2>
+      {(title || subtitle) && (
+        <div className="mb-6 flex w-full flex-col items-center gap-3 md:mb-6">
+          {title && (
+            <h2 className="text-xl font-bold tracking-tight text-white md:text-2xl">
+              <OIOBlue text={title} />
+            </h2>
+          )}
+          {subtitle && (
+            <p className="max-w-xl text-base text-[#e0e0e0] md:text-lg">
+              {subtitle}
+            </p>
+          )}
+        </div>
       )}
-      {subtitle && (
-        <p className="text-[#e0e0e0] text-base md:text-lg max-w-xl">
-          {subtitle}
-        </p>
-      )}
-      <div className="w-full max-w-3xl bg-[#161616] border border-[#333333] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-[#333333] bg-[#161616] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         <video
           className="w-full aspect-video object-contain bg-black"
           src={src}

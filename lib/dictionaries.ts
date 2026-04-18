@@ -21,6 +21,7 @@ export const translations = {
     },
     booking: {
       sectionTitle: '预约咨询',
+      sectionSubtitle: '扫码加好友，第一时间获取课程开放时间',
       contactEmailLabel: '联系我们：',
       supportEmail: 'ziyoumaoxianying@gmail.com',
       copy: '复制',
@@ -32,7 +33,7 @@ export const translations = {
     countdown: {
       sectionTitle: '距本批招募截止',
       notice: '本期限额约 50 人，招满即止',
-      closedLine1: '首批创始名额已满，招募已截止。',
+      closedLine1: '本批招募已截止',
       closedLine2: '预约下一批，第一时间获取开放通知。',
       days: '天',
       hours: '时',
@@ -154,8 +155,8 @@ export const translations = {
     },
     enrollment: {
       joinNow: '立即加入',
-      reserveNow: '即将发布 · 预约优先名额',
-      reserveAriaLabel: '即将发布 · 预约优先名额，前往微信',
+      reserveNow: '立即预约',
+      reserveAriaLabel: '立即预约，前往预约咨询',
     },
     faq: {
       sectionTitle: '常见问题',
@@ -217,6 +218,7 @@ export const translations = {
     },
     booking: {
       sectionTitle: '預約諮詢',
+      sectionSubtitle: '掃碼加好友，第一時間獲取課程開放時間',
       contactEmailLabel: '聯絡我們：',
       supportEmail: 'ziyoumaoxianying@gmail.com',
       copy: '複製',
@@ -228,7 +230,7 @@ export const translations = {
     countdown: {
       sectionTitle: '距本批招募截止',
       notice: '本期限額約 50 人，招滿即止',
-      closedLine1: '首批創始名額已滿，招募已截止。',
+      closedLine1: '本批招募已截止',
       closedLine2: '預約下一批，第一時間獲取開放通知。',
       days: '天',
       hours: '時',
@@ -350,8 +352,8 @@ export const translations = {
     },
     enrollment: {
       joinNow: '立即加入',
-      reserveNow: '即將發布 · 預約優先名額',
-      reserveAriaLabel: '即將發布 · 預約優先名額，前往微信',
+      reserveNow: '立即預約',
+      reserveAriaLabel: '立即預約，前往預約諮詢',
     },
     faq: {
       sectionTitle: '常見問題',
