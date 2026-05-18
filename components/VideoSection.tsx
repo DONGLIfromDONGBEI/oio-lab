@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /** Renders text with "OIO" in accent blue */
 function OIOBlue({ text }: { text: string }) {
@@ -26,10 +27,10 @@ interface VideoSectionProps {
   title?: string;
   /** Optional subtitle */
   subtitle?: string;
-  /** Video URL */
-  src: string;
-  /** Optional poster/thumbnail URL when first frame cannot be used */
-  poster?: string;
+  /** 内地线路：B 站 BV 号 */
+  bilibiliBvid?: string;
+  /** 非内地线路：YouTube 视频 ID */
+  youtubeVideoId?: string;
   /** 覆盖区块顶部间距（默认 mt-10），用于与上下模块对称留白 */
   sectionClassName?: string;
 }
@@ -37,10 +38,22 @@ interface VideoSectionProps {
 export function VideoSection({
   title,
   subtitle,
-  src,
-  poster,
+  bilibiliBvid,
+  youtubeVideoId,
   sectionClassName,
 }: VideoSectionProps) {
+  const { isMainlandChina, geoReady } = useLanguage();
+
+  const surface: "loading" | "bilibili" | "youtube" | "unavailable" = !geoReady
+    ? "loading"
+    : isMainlandChina
+      ? bilibiliBvid
+        ? "bilibili"
+        : "unavailable"
+      : youtubeVideoId
+        ? "youtube"
+        : "unavailable";
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 16 }}
@@ -67,16 +80,33 @@ export function VideoSection({
         </div>
       )}
       <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-[#333333] bg-[#161616] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-        <video
-          className="w-full aspect-video object-contain bg-black"
-          src={src}
-          poster={poster}
-          controls
-          preload="metadata"
-          playsInline
-        >
-          您的浏览器不支持视频播放。
-        </video>
+        <div className="relative aspect-video w-full bg-black">
+          {surface === "loading" ? (
+            <div className="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-[#b5b5b5]">
+              正在根据网络地区选择视频线路...
+            </div>
+          ) : surface === "bilibili" ? (
+            <iframe
+              title={title ? `${title} — Bilibili` : "Bilibili video"}
+              src={`https://player.bilibili.com/player.html?isOutside=true&bvid=${encodeURIComponent(bilibiliBvid!)}&p=1&autoplay=0&danmaku=0`}
+              className="absolute inset-0 h-full w-full"
+              allowFullScreen
+            />
+          ) : surface === "youtube" ? (
+            <iframe
+              title={title ? `${title} — YouTube` : "YouTube video"}
+              src={`https://www.youtube.com/embed/${encodeURIComponent(youtubeVideoId!)}?rel=0&modestbranding=1`}
+              className="absolute inset-0 h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-[#b5b5b5]">
+              当前地区的视频线路未配置，请稍后重试或联系管理员。
+            </div>
+          )}
+        </div>
       </div>
     </motion.section>
   );

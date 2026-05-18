@@ -14,19 +14,7 @@ import { SHOW_COURSE_INFO_CARD, SHOW_COUNTDOWN_SECTION } from "@/lib/page-sectio
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Footer } from "@/components/Footer";
 import { FaqSection } from "@/components/FaqSection";
-
-const VIDEO_OIO_INTRO =
-  "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/OIO%E7%90%86%E5%BF%B5%E4%BB%8B%E7%BB%8D.mp4";
-const POSTER_OIO_INTRO =
-  "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/OIO%E7%90%86%E5%BF%B5%E4%BB%8B%E7%BB%8D-%E5%B0%81%E9%9D%A2.jpg";
-const VIDEO_OIO_LAUNCH =
-  "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/oio%E5%8F%91%E5%B8%83%E4%BB%8B%E7%BB%8D.mp4";
-const POSTER_OIO_LAUNCH =
-  "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/W8-%E5%B0%81%E9%9D%A2.jpg";
-const VIDEO_REVIEW =
-  "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/%E9%BB%91%E6%A2%A8%E7%9A%84Review.mp4";
-const POSTER_REVIEW =
-  "https://oiosync-landingpage.oss-cn-hongkong.aliyuncs.com/%E9%BB%91%E6%A2%A8%E7%9A%84Review-%E5%B0%81%E9%9D%A2.jpg";
+import { VIDEO_DECADE, VIDEO_HAILEY, VIDEO_INTRO } from "@/lib/video-sources";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -46,8 +34,8 @@ export default function Home() {
         {/* Video: OIO 2分钟介绍 */}
         <VideoSection
           title={t.videos.introTitle}
-          src={VIDEO_OIO_INTRO}
-          poster={POSTER_OIO_INTRO}
+          bilibiliBvid={VIDEO_INTRO.bilibiliBvid || undefined}
+          youtubeVideoId={VIDEO_INTRO.youtubeId || undefined}
         />
 
         {/* Course Intro: OIO系统拆解 */}
@@ -56,10 +44,10 @@ export default function Home() {
         {/* 不适合谁 · 适合谁（先排除再对号入座） */}
         <WhoItsFor />
 
-        {/* 你的OIO六周进化：纵向时间线 */}
+        {/* 你的OIO进化地图：纵向时间线 */}
         <SixWeekEvolution />
 
-        {/* 本期课程信息：六周地图后；显示开关见 lib/page-sections.ts */}
+        {/* 本期课程信息：进化地图后；显示开关见 lib/page-sections.ts */}
         {SHOW_COURSE_INFO_CARD ? <CourseInfoCard /> : null}
 
         {/* 招募截止倒计时：紧接课程信息，再引导中部 CTA；开关见 lib/page-sections.ts */}
@@ -71,15 +59,15 @@ export default function Home() {
         <VideoSection
           title={t.videos.decadeTitle}
           subtitle={t.videos.decadeSubtitle}
-          src={VIDEO_OIO_LAUNCH}
-          poster={POSTER_OIO_LAUNCH}
+          bilibiliBvid={VIDEO_DECADE.bilibiliBvid || undefined}
+          youtubeVideoId={VIDEO_DECADE.youtubeId || undefined}
         />
 
         {/* Video: Hailey的OIO深度使用评测 */}
         <VideoSection
           title={t.videos.haileyTitle}
-          src={VIDEO_REVIEW}
-          poster={POSTER_REVIEW}
+          bilibiliBvid={VIDEO_HAILEY.bilibiliBvid || undefined}
+          youtubeVideoId={VIDEO_HAILEY.youtubeId || undefined}
         />
 
         {/* 预约咨询（微信 / Email）：与上方按钮相对视频的留白一致（mt-8 / md:mt-10） */}

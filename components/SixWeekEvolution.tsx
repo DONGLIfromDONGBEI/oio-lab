@@ -13,7 +13,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Check } from "lucide-react";
 import clsx from "clsx";
 
-/** 六周闯关地图插画：无顶栏大标题、无底部「地基 / O / I / O / 整合」图例条（见 public/six-week-map-clean.png） */
+/** 闯关地图插画：无顶栏大标题、无底部「地基 / O / I / O / 整合」图例条（见 public/six-week-map-clean.png） */
 const SIX_WEEK_MAP = {
   src: "/six-week-map-clean.png",
   width: 1024,
@@ -162,34 +162,34 @@ export function SixWeekEvolution() {
   const s = t.sixWeek;
 
   const lineZoneRef = useRef<HTMLDivElement>(null);
-  const week6RowRef = useRef<HTMLDivElement>(null);
+  const finalStageRowRef = useRef<HTMLDivElement>(null);
   const finaleAnchorRef = useRef<HTMLDivElement>(null);
   const autoScrollDone = useRef(false);
 
-  /** 滚过第六周对应进度：一次性点亮竖线剩余段 + 箭头 + 总结句；游标隐藏。回滚则恢复。 */
+  /** 滚过最后一关对应进度：一次性点亮竖线剩余段 + 箭头 + 总结句；游标隐藏。回滚则恢复。 */
   const [tailSnap, setTailSnap] = useState(false);
   const SNAP_ON = 0.79;
   const SNAP_OFF = 0.7;
 
-  const isWeek6InView = useInView(week6RowRef, {
+  const isFinalStageInView = useInView(finalStageRowRef, {
     amount: 0.32,
     margin: "0px 0px -12% 0px",
   });
 
   useEffect(() => {
-    if (!isWeek6InView) {
+    if (!isFinalStageInView) {
       autoScrollDone.current = false;
     }
-  }, [isWeek6InView]);
+  }, [isFinalStageInView]);
 
   useEffect(() => {
-    if (!isWeek6InView || autoScrollDone.current) return;
+    if (!isFinalStageInView || autoScrollDone.current) return;
     autoScrollDone.current = true;
     finaleAnchorRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "center",
     });
-  }, [isWeek6InView]);
+  }, [isFinalStageInView]);
 
   const { scrollYProgress: lineProgress } = useScroll({
     target: lineZoneRef,
@@ -210,7 +210,7 @@ export function SixWeekEvolution() {
   });
 
   const markerTop = useTransform(lineProgress, (p) => `${Math.min(100, Math.max(0, p * 100))}%`);
-  /** 仅进场淡入；到达第六周阈值时整段卸载，与尾段一次性点亮同步 */
+  /** 仅进场淡入；到达最后一关阈值时整段卸载，与尾段一次性点亮同步 */
   const markerOpacity = useTransform(lineProgress, [0, 0.04], [0, 1]);
 
   return (
@@ -278,7 +278,7 @@ export function SixWeekEvolution() {
             </motion.div>
           )}
 
-          {/* 未到第六周阈值：箭头整段保持灰色；越阈值后与竖线一并全蓝 */}
+          {/* 未到最后一关阈值：箭头整段保持灰色；越阈值后与竖线一并全蓝 */}
           <div
             className="pointer-events-none absolute bottom-0 left-1/2 z-10 hidden -translate-x-1/2 md:block"
             aria-hidden
@@ -310,7 +310,7 @@ export function SixWeekEvolution() {
             return (
               <div
                 key={i}
-                ref={i === 5 ? week6RowRef : undefined}
+                ref={i === s.weeks.length - 1 ? finalStageRowRef : undefined}
                 className="relative mb-12 flex flex-col gap-4 md:mb-16 md:grid md:grid-cols-[minmax(0,1fr)_20px_minmax(0,1fr)] md:gap-x-6 md:gap-y-0"
               >
                 {i % 2 === 0 ? (
