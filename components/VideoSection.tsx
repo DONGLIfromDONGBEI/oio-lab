@@ -82,8 +82,12 @@ export function VideoSection({
       <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-[#333333] bg-[#161616] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         <div className="relative aspect-video w-full bg-black">
           {surface === "loading" ? (
-            <div className="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-[#b5b5b5]">
-              正在根据网络地区选择视频线路...
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
+              <svg className="h-8 w-8 animate-spin text-[#537FE7]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              <span className="text-sm text-[#b5b5b5]">视频加载中…</span>
             </div>
           ) : surface === "bilibili" ? (
             <iframe
