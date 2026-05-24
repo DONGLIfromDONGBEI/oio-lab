@@ -5,6 +5,7 @@ import { Hero } from "@/components/Hero";
 import { VideoSection } from "@/components/VideoSection";
 import { ReviewPhasesSection } from "@/components/ReviewPhasesSection";
 import { CourseIntro } from "@/components/CourseIntro";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { WhoItsFor } from "@/components/WhoItsFor";
 import { SixWeekEvolution } from "@/components/SixWeekEvolution";
 import { Countdown } from "@/components/Countdown";
@@ -41,6 +42,9 @@ export default function Home() {
 
         {/* Course Intro: OIO系统拆解 */}
         <CourseIntro />
+
+        {/* Testimonials: 学员真实反馈（置于系统拆解后） */}
+        <TestimonialsSection />
 
         {/* 不适合谁 · 适合谁（先排除再对号入座） */}
         <WhoItsFor />
