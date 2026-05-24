@@ -90,16 +90,18 @@ export function ReviewPhasesSection({
       )}
 
       <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-[#333333] bg-[#161616] p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:p-6">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <p className="text-sm font-semibold text-white md:text-base">{selectorLabel}</p>
-            <div className="flex flex-wrap gap-1.5">
+        <div className="mb-4 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <p className="whitespace-nowrap text-sm font-semibold text-white">
+              {selectorLabel}
+            </p>
+            <div className="flex gap-1">
               {phases.slice(0, 3).map((item, idx) => (
                 <button
                   key={item.phase}
                   onClick={() => setActiveIdx(idx)}
                   className={clsx(
-                    "h-8 w-8 rounded-full border text-sm font-semibold transition",
+                    "h-7 w-7 rounded-full border text-sm font-semibold transition",
                     idx === safeIdx
                       ? "border-[#537FE7] bg-[#1b2437] text-white"
                       : "border-[#3a3f4d] text-[#c4c7d0] hover:border-[#537FE7]"
@@ -111,7 +113,9 @@ export function ReviewPhasesSection({
               ))}
             </div>
           </div>
-          <h3 className="text-lg font-semibold text-white md:text-xl">{titleText}</h3>
+          <h3 className="whitespace-nowrap text-sm font-semibold text-white">
+            {titleText}
+          </h3>
         </div>
 
         <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-[#2f3340] bg-black">

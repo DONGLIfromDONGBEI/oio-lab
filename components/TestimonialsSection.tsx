@@ -262,9 +262,12 @@ export function TestimonialsSection({ className }: { className?: string }) {
                     height={1200}
                     className="max-h-full w-auto max-w-full object-contain"
                   />
-                  <span className="pointer-events-none absolute bottom-3 right-3 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
-                    {locale === "zh-TW" ? "點擊放大" : "点击放大"}
-                  </span>
+                  <div className="pointer-events-none absolute bottom-3 right-3 rounded-md bg-black/60 px-2 py-1 text-right text-xs text-white">
+                    <div>{locale === "zh-TW" ? "點擊放大" : "点击放大"}</div>
+                    <div className="text-[10px] text-white/85">
+                      {locale === "zh-TW" ? "手機可左右滑動" : "手机可左右滑动"}
+                    </div>
+                  </div>
                 </div>
               </button>
             </article>
