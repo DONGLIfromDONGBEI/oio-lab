@@ -47,12 +47,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
     const detectLocation = async () => {
       try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000);
-        const response = await fetch("https://ipapi.co/json/", {
-          signal: controller.signal,
-        });
-        clearTimeout(timeout);
+        const response = await fetch("https://ipapi.co/json/");
         const data = await response.json();
         const cc =
           typeof data.country_code === "string" ? data.country_code : null;

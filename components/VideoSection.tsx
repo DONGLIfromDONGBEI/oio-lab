@@ -42,17 +42,20 @@ export function VideoSection({
   youtubeVideoId,
   sectionClassName,
 }: VideoSectionProps) {
-  const { isMainlandChina, geoReady } = useLanguage();
+  const { countryCode, isMainlandChina, geoReady } = useLanguage();
 
-  const surface: "loading" | "bilibili" | "youtube" | "unavailable" = !geoReady
-    ? "loading"
-    : isMainlandChina
-      ? bilibiliBvid
-        ? "bilibili"
-        : "unavailable"
-      : youtubeVideoId
-        ? "youtube"
-        : "unavailable";
+  const surface: "loading" | "geo-unavailable" | "bilibili" | "youtube" | "unavailable" =
+    !geoReady
+      ? "loading"
+      : countryCode === null
+        ? "geo-unavailable"
+        : isMainlandChina
+          ? bilibiliBvid
+            ? "bilibili"
+            : "unavailable"
+          : youtubeVideoId
+            ? "youtube"
+            : "unavailable";
 
   return (
     <motion.section
@@ -88,6 +91,10 @@ export function VideoSection({
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
               <span className="text-sm text-[#b5b5b5]">视频加载中…</span>
+            </div>
+          ) : surface === "geo-unavailable" ? (
+            <div className="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-[#b5b5b5]">
+              网络地区检测失败，请刷新页面重试。
             </div>
           ) : surface === "bilibili" ? (
             <iframe

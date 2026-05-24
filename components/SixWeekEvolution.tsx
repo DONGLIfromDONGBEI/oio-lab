@@ -15,7 +15,7 @@ import clsx from "clsx";
 
 /** 闯关地图插画：无顶栏大标题、无底部「地基 / O / I / O / 整合」图例条（见 public/six-week-map-clean.png） */
 const SIX_WEEK_MAP = {
-  src: "/six-week-map-clean.png",
+  src: "/six-week-map-clean-v2.png",
   width: 1024,
   height: 470,
 } as const;
@@ -72,6 +72,21 @@ function OIOBlue({ text }: { text: string }) {
           ) : null}
         </React.Fragment>
       ))}
+    </>
+  );
+}
+
+function PostTitle({ text }: { text: string }) {
+  const marker = "oio定投自己";
+  const idx = text.indexOf(marker);
+  if (idx === -1) return <>{text}</>;
+  const before = text.slice(0, idx);
+  const after = text.slice(idx + marker.length);
+  return (
+    <>
+      {before}
+      <span className="text-[#537FE7]">{marker}</span>
+      {after}
     </>
   );
 }
@@ -339,6 +354,30 @@ export function SixWeekEvolution() {
 
         <div ref={finaleAnchorRef} className="mx-auto max-w-xl px-2 pb-0 pt-2 text-center md:pt-4">
           <p className={clsx(BODY_BLUE, "font-semibold")}>{s.finale}</p>
+        </div>
+
+        <div className="mt-6 flex justify-center">
+          <div className="w-full max-w-[31.5rem] rounded-2xl border border-[#333333] bg-[#161616] py-5 pl-5 pr-2 shadow-[0_12px_40px_rgba(0,0,0,0.45)] md:py-6 md:pl-6 md:pr-2">
+            <p className={clsx(BODY, "text-white")}>
+              <PostTitle text={s.postGraduationTitle} />
+            </p>
+            {s.postGraduationDescription ? (
+              <p className={clsx(BODY, "mt-2")}>{s.postGraduationDescription}</p>
+            ) : null}
+            <ul className="mt-3 space-y-2.5 text-left">
+              {s.postGraduationBullets.map((item, idx) => (
+                <li key={idx} className="flex gap-2">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#537FE7]/15 text-[#537FE7] md:h-[1.375rem] md:w-[1.375rem]">
+                    <Check className="h-3 w-3" strokeWidth={2.5} />
+                  </span>
+                  <span className={BODY}>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className={clsx(BODY_BLUE, "mt-4")}>
+              {s.postGraduationOutro}
+            </p>
+          </div>
         </div>
       </div>
     </motion.section>

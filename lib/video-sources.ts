@@ -5,6 +5,8 @@
  * NEXT_PUBLIC_VIDEO_INTRO_BVID / NEXT_PUBLIC_VIDEO_INTRO_YOUTUBE
  * NEXT_PUBLIC_VIDEO_DECADE_BVID / NEXT_PUBLIC_VIDEO_DECADE_YOUTUBE
  * NEXT_PUBLIC_VIDEO_HAILEY_BVID / NEXT_PUBLIC_VIDEO_HAILEY_YOUTUBE
+ * NEXT_PUBLIC_VIDEO_HAILEY_P2_BVID / NEXT_PUBLIC_VIDEO_HAILEY_P2_YOUTUBE
+ * NEXT_PUBLIC_VIDEO_HAILEY_P3_BVID / NEXT_PUBLIC_VIDEO_HAILEY_P3_YOUTUBE
  */
 
 const env = (key: string) =>
@@ -24,3 +26,24 @@ export const VIDEO_HAILEY = {
   bilibiliBvid: env("NEXT_PUBLIC_VIDEO_HAILEY_BVID") || "BV1Yu5x6AECE",
   youtubeId: env("NEXT_PUBLIC_VIDEO_HAILEY_YOUTUBE") || "DrLwsubyqcU",
 } as const;
+
+export const VIDEO_HAILEY_PHASES = [
+  {
+    phase: 1,
+    label: "第一期评测",
+    bilibiliBvid: env("NEXT_PUBLIC_VIDEO_HAILEY_BVID") || "BV1Yu5x6AECE",
+    youtubeVideoId: env("NEXT_PUBLIC_VIDEO_HAILEY_YOUTUBE") || "DrLwsubyqcU",
+  },
+  {
+    phase: 2,
+    label: "第二期评测",
+    bilibiliBvid: env("NEXT_PUBLIC_VIDEO_HAILEY_P2_BVID") || "BV1YJG76iEjp",
+    youtubeVideoId: env("NEXT_PUBLIC_VIDEO_HAILEY_P2_YOUTUBE") || "NI5a5dS7BNk",
+  },
+  {
+    phase: 3,
+    label: "第三期评测",
+    bilibiliBvid: env("NEXT_PUBLIC_VIDEO_HAILEY_P3_BVID"),
+    youtubeVideoId: env("NEXT_PUBLIC_VIDEO_HAILEY_P3_YOUTUBE"),
+  },
+] as const;

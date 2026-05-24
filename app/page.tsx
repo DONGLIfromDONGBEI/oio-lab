@@ -3,6 +3,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Hero } from "@/components/Hero";
 import { VideoSection } from "@/components/VideoSection";
+import { ReviewPhasesSection } from "@/components/ReviewPhasesSection";
 import { CourseIntro } from "@/components/CourseIntro";
 import { WhoItsFor } from "@/components/WhoItsFor";
 import { SixWeekEvolution } from "@/components/SixWeekEvolution";
@@ -14,10 +15,10 @@ import { SHOW_COURSE_INFO_CARD, SHOW_COUNTDOWN_SECTION } from "@/lib/page-sectio
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Footer } from "@/components/Footer";
 import { FaqSection } from "@/components/FaqSection";
-import { VIDEO_DECADE, VIDEO_HAILEY, VIDEO_INTRO } from "@/lib/video-sources";
+import { VIDEO_DECADE, VIDEO_HAILEY_PHASES, VIDEO_INTRO } from "@/lib/video-sources";
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <main className="relative flex min-h-screen flex-col overflow-x-clip selection:bg-[#537FE7]/30 selection:text-white">
@@ -63,11 +64,20 @@ export default function Home() {
           youtubeVideoId={VIDEO_DECADE.youtubeId || undefined}
         />
 
-        {/* Video: Hailey的OIO深度使用评测 */}
-        <VideoSection
+        {/* Video: Hailey 的 OIO 深度使用评测（按期次切换） */}
+        <ReviewPhasesSection
           title={t.videos.haileyTitle}
-          bilibiliBvid={VIDEO_HAILEY.bilibiliBvid || undefined}
-          youtubeVideoId={VIDEO_HAILEY.youtubeId || undefined}
+          phases={VIDEO_HAILEY_PHASES.map((item) => ({
+            ...item,
+            label:
+              locale === "zh-TW"
+                ? item.phase === 1
+                  ? "第一期評測"
+                  : item.phase === 2
+                    ? "第二期評測"
+                    : "第三期評測"
+                : item.label,
+          }))}
         />
 
         {/* 预约咨询（微信 / Email）：与上方按钮相对视频的留白一致（mt-8 / md:mt-10） */}
