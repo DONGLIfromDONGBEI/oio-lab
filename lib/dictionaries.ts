@@ -31,8 +31,8 @@ export const translations = {
       copyright: '© 2026 OIO Sync. All rights reserved.',
     },
     countdown: {
-      sectionTitle: '距本批招募截止',
-      notice: '本期限额约 50 人，招满即止',
+      sectionTitle: '距限时500元折扣结束',
+      notice: '限22个名额',
       closedLine1: '本批招募已截止',
       closedLine2: '预约下一批，第一时间获取开放通知。',
       days: '天',
@@ -237,8 +237,8 @@ export const translations = {
       copyright: '© 2026 OIO Sync. All rights reserved.',
     },
     countdown: {
-      sectionTitle: '距本批招募截止',
-      notice: '本期限額約 50 人，招滿即止',
+      sectionTitle: '距限時500元折扣結束',
+      notice: '限22個名額',
       closedLine1: '本批招募已截止',
       closedLine2: '預約下一批，第一時間獲取開放通知。',
       days: '天',

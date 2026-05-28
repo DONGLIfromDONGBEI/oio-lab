@@ -32,6 +32,7 @@ export default function Home() {
         <div className="w-full flex justify-start">
           <Hero />
         </div>
+        <EnrollmentCta className="mt-8 md:mt-10" />
 
         {/* Video: OIO 2分钟介绍 */}
         <VideoSection
@@ -91,6 +92,10 @@ export default function Home() {
         >
           <BookingTabs />
         </div>
+
+        {SHOW_COUNTDOWN_SECTION ? <Countdown /> : null}
+
+        <EnrollmentCta className="mt-8 md:mt-10" />
 
         <FaqSection />
       </div>

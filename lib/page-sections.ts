@@ -6,4 +6,4 @@
  */
 export const SHOW_COURSE_INFO_CARD = false;
 /** 距本批招募截止：本期关闭；下期改 true 即恢复 */
-export const SHOW_COUNTDOWN_SECTION = false;
+export const SHOW_COUNTDOWN_SECTION = true;
