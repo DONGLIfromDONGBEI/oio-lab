@@ -84,9 +84,11 @@ export function Countdown() {
                 <span className="text-[#e0e0e0] text-sm">{t.countdown.seconds}</span>
               </span>
             </div>
-            <p className="mt-5 max-w-xl text-center text-sm font-medium leading-snug text-[#537FE7] md:text-base">
-              {t.countdown.notice}
-            </p>
+            {t.countdown.notice ? (
+              <p className="mt-5 max-w-xl text-center text-sm font-medium leading-snug text-[#537FE7] md:text-base">
+                {t.countdown.notice}
+              </p>
+            ) : null}
           </>
         )}
       </div>

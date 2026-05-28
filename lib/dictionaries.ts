@@ -32,7 +32,7 @@ export const translations = {
     },
     countdown: {
       sectionTitle: '距限时500元折扣结束',
-      notice: '限22个名额',
+      notice: '',
       closedLine1: '本批招募已截止',
       closedLine2: '预约下一批，第一时间获取开放通知。',
       days: '天',
@@ -238,7 +238,7 @@ export const translations = {
     },
     countdown: {
       sectionTitle: '距限時500元折扣結束',
-      notice: '限22個名額',
+      notice: '',
       closedLine1: '本批招募已截止',
       closedLine2: '預約下一批，第一時間獲取開放通知。',
       days: '天',
