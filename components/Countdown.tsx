@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
 /** 固定截止时刻（ISO 含 +08:00）；全球用户看到的剩余时间一致，晚于此刻显示「已截止」 */
-const DEADLINE_MS = new Date("2026-05-29T21:00:00+08:00").getTime();
+const DEADLINE_MS = new Date("2026-05-30T21:00:00+08:00").getTime();
 
 function getRemaining(now: number) {
   const d = Math.max(0, DEADLINE_MS - now);
